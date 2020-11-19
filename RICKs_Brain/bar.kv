@@ -1,0 +1,137 @@
+#:kivy 1.11.1
+
+## ---------------------------------------------------------------------------------------------------------------------
+<LoginScreen>:
+    Button:
+        text: 'Go Home'
+        on_release: root.manager.current = 'home'
+
+## ---------------------------------------------------------------------------------------------------------------------
+<HomeScreen>:
+
+    GridLayout:
+        rows: 3
+
+## Top Row
+        GridLayout:
+            cols: 3
+            size_hint_y: 0.2
+            padding: [15,5,15,5]
+
+            Label:
+                id: user
+                size_hint_x: 0.75
+                text: 'User: Ryan Hiatt'
+                text_size: self.size
+                font_size: 20
+                halign: 'left'
+                valign: 'middle'
+
+            Label:
+                id: clk
+                text: 'CLOCK'
+                font_size: 40
+                halign: 'center'
+                valign: 'middle'
+
+            Label:
+                id: user
+                size_hint_x: 0.75
+                text: 'Date: 11/17/2020'
+                text_size: self.size
+                font_size: 20
+                halign: 'right'
+                valign: 'middle'
+
+## Middle Row
+        GridLayout:
+            cols: 4
+            padding: [5, 0, 5, 0]
+
+            AnchorLayout:
+                anchor_x: 'center'
+
+                Button:
+                    size_hint_x: 0.98
+                    text: 'All Drinks'
+                    font_size: 30
+                    on_press:
+                        root.manager.current = 'drinks'
+
+            AnchorLayout:
+                anchor_x: 'center'
+
+                Button:
+                    size_hint_x: 0.98
+                    text: '     Drink\nCategories'
+                    font_size: 30
+                    on_press:
+                        root.manager.current = 'category'
+
+            AnchorLayout:
+                anchor_x: 'center'
+
+                Button:
+                    size_hint_x: 0.98
+                    text: 'Shots\n    &\nNeats'
+                    font_size: 30
+                    on_press:
+                        root.manager.current = 'shots'
+
+            AnchorLayout:
+                anchor_x: 'center'
+
+                Button:
+                    size_hint_x: 0.98
+                    text: 'Create Drink'
+                    font_size: 30
+                    on_press:
+                        root.manager.current = 'create'
+
+## Bottom Row
+        GridLayout:
+            cols: 3
+            size_hint_y: 0.25
+
+            AnchorLayout:
+                anchor_x: 'left'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [8, 10, 5, 5]
+
+                Button:
+                    text: 'Sign Out'
+                    font_size: 20
+                    on_press:
+                        root.manager.current = 'home'
+
+            Label:
+                text: 'R.I.C.K.'
+                font_size: 60
+                halign: 'center'
+                valign: 'middle'
+
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [5, 10, 8, 5]
+
+                Button:
+                    width: root.width/4 - 30
+                    text: 'Settings'
+                    font_size: 20
+                    on_press:
+                        root.manager.current = 'home'
+
+## ---------------------------------------------------------------------------------------------------------------------
+<AllDrinksScreen>:
+
+## ---------------------------------------------------------------------------------------------------------------------
+<CategoriesScreen>:
+
+## ---------------------------------------------------------------------------------------------------------------------
+<ShotsScreen>:
+
+## ---------------------------------------------------------------------------------------------------------------------
+<CreateDrinkScreen>:

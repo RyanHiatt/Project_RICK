@@ -1,0 +1,17 @@
+Screen Structure:
+
+    ScreenManager
+        LoginScreen
+            HomeScreen
+                AllDrinksScreen
+
+                CategoriesScreen
+
+                ShotsScreen
+
+                CreateDrinkScreen
+
+                LockDevicePopup
+
+                SettingsScreen
+
