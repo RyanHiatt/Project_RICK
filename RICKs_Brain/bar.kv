@@ -2,9 +2,69 @@
 
 ## ---------------------------------------------------------------------------------------------------------------------
 <LoginScreen>:
-    Button:
-        text: 'Go Home'
-        on_release: root.manager.current = 'home'
+    GridLayout:
+        cols: 3
+
+        Label:
+
+        GridLayout:
+            rows: 8
+
+            Label:
+                text: 'R.I.C.K.'
+                font_size: 100
+
+            GridLayout:
+                cols: 2
+                size_hint_y: 0.3
+
+                Label:
+                    size_hint_x: 0.3
+                    text: 'User ID:'
+                    halign: 'left'
+                    valign: 'bottom'
+
+                Label:
+
+            TextInput:
+                size_hint_y: 0.4
+                font_size: 60
+
+            GridLayout:
+                cols: 2
+                size_hint_y: 0.3
+
+                Label:
+                    size_hint_x: 0.4
+                    text: 'Password:'
+                    halign: 'left'
+                    valign: 'bottom'
+
+                Label:
+
+            TextInput:
+                size_hint_y: 0.4
+                font_size: 60
+
+            Label:
+                size_hint_y: 0.2
+
+            GridLayout:
+                cols:2
+                size_hint_y: 0.4
+
+                Button:
+                    text: 'Submit'
+                    size_hint_x: 0.8
+                    pos_hint_y: {'left': 1, 'y': 0.5}
+                    on_release:
+                        root.manager.current = 'home'
+
+                Label:
+
+            Label:
+
+        Label:
 
 ## ---------------------------------------------------------------------------------------------------------------------
 <HomeScreen>:
@@ -55,7 +115,7 @@
                     size_hint_x: 0.98
                     text: 'All Drinks'
                     font_size: 30
-                    on_press:
+                    on_release:
                         root.manager.current = 'drinks'
 
             AnchorLayout:
@@ -65,7 +125,7 @@
                     size_hint_x: 0.98
                     text: '     Drink\nCategories'
                     font_size: 30
-                    on_press:
+                    on_release:
                         root.manager.current = 'category'
 
             AnchorLayout:
@@ -75,7 +135,7 @@
                     size_hint_x: 0.98
                     text: 'Shots\n    &\nNeats'
                     font_size: 30
-                    on_press:
+                    on_release:
                         root.manager.current = 'shots'
 
             AnchorLayout:
@@ -85,7 +145,7 @@
                     size_hint_x: 0.98
                     text: 'Create Drink'
                     font_size: 30
-                    on_press:
+                    on_release:
                         root.manager.current = 'create'
 
 ## Bottom Row
@@ -102,8 +162,8 @@
                 Button:
                     text: 'Sign Out'
                     font_size: 20
-                    on_press:
-                        root.manager.current = 'home'
+                    on_release:
+                        root.manager.current = 'login'
 
             Label:
                 text: 'R.I.C.K.'
@@ -121,7 +181,7 @@
                     width: root.width/4 - 30
                     text: 'Settings'
                     font_size: 20
-                    on_press:
+                    on_release:
                         root.manager.current = 'home'
 
 ## ---------------------------------------------------------------------------------------------------------------------
