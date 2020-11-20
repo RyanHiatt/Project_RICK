@@ -79,7 +79,6 @@
             padding: [15,5,15,5]
 
             Label:
-                id: user
                 size_hint_x: 0.75
                 text: 'User: Ryan Hiatt'
                 text_size: self.size
@@ -88,14 +87,12 @@
                 valign: 'middle'
 
             Label:
-                id: clk
                 text: 'CLOCK'
                 font_size: 40
                 halign: 'center'
                 valign: 'middle'
 
             Label:
-                id: user
                 size_hint_x: 0.75
                 text: 'Date: 11/17/2020'
                 text_size: self.size
@@ -163,7 +160,7 @@
                     text: 'Sign Out'
                     font_size: 20
                     on_release:
-                        root.manager.current = 'login'
+                        root.open_lockpop()
 
             Label:
                 text: 'R.I.C.K.'
@@ -192,6 +189,93 @@
 
 ## ---------------------------------------------------------------------------------------------------------------------
 <ShotsScreen>:
+
+	GridLayout:
+		rows: 3
+
+		Label:
+			size_hint_y: 0.25
+			text: 'Shots and Neats'
+			text_size: self.size
+			font_size: 80
+			halign: 'center'
+			valign: 'middle'
+
+		GridLayout:
+			rows: 2
+			cols: 3
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Whiskey'
+					font_size: 60
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Vodka'
+					font_size: 60
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Tequila'
+					font_size: 60
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Rum'
+					font_size: 60
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Gin'
+					font_size: 60
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Brandy'
+					font_size: 60
+					on_press: root.open_shotspop()
+
+		AnchorLayout:
+			size_hint_y: 0.25
+			anchor_x: 'center'
+			anchor_y: 'bottom'
+			Button:
+				size_hint_x: 0.25
+				size_hint_y: 0.85
+				text: 'Back'
+				font_size: 60
+				on_press:
+					root.manager.current = 'home'
 
 ## ---------------------------------------------------------------------------------------------------------------------
 <CreateDrinkScreen>:
