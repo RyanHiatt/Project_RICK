@@ -3,15 +3,20 @@ Screen Structure:
     ScreenManager
         LoginScreen
             HomeScreen
-                AllDrinksScreen
+                #LockDevicePopup
+                #SettingsScreen
 
-                CategoriesScreen
+                AllDrinksScreen
+                    #BackButton
+                    #CategoriesPopup
+
+                    CategoriesScreen
+
 
                 ShotsScreen
+                    #ShotsPopup
+
+
+                FavoritesScreen
 
                 CreateDrinkScreen
-
-                LockDevicePopup
-
-                SettingsScreen
-

@@ -1,0 +1,195 @@
+<LoginScreen>:
+    username: username
+    passwd: passwd
+
+    GridLayout:
+        cols: 3
+
+        Label:
+
+        GridLayout:
+            rows: 8
+
+            Label:
+                text: 'R.I.C.K.'
+                font_size: 100
+
+            GridLayout:
+                cols: 2
+                size_hint_y: 0.3
+
+                Label:
+                    size_hint_x: 0.3
+                    text: 'User ID:'
+                    halign: 'left'
+                    valign: 'bottom'
+
+                Label:
+
+            TextInput:
+                id: username
+                size_hint_y: 0.4
+                font_size: 60
+
+            GridLayout:
+                cols: 2
+                size_hint_y: 0.3
+
+                Label:
+                    size_hint_x: 0.4
+                    text: 'Password:'
+                    halign: 'left'
+                    valign: 'bottom'
+
+                Label:
+
+            TextInput:
+                id: passwd
+                size_hint_y: 0.4
+                font_size: 60
+
+            Label:
+                size_hint_y: 0.2
+
+            GridLayout:
+                cols:2
+                size_hint_y: 0.4
+
+                Button:
+                    text: 'Submit'
+                    size_hint_x: 0.8
+                    pos_hint_y: {'left': 1, 'y': 0.5}
+                    on_release:
+                        root.manager.current = 'home'
+
+                Label:
+
+            Label:
+
+        Label:
+
+
+
+
+
+
+
+
+
+
+
+<LoginScreen>:
+    passkey: passkey
+    one: one
+    two: two
+    three: three
+    four: four
+    five: five
+    six: six
+    seven: seven
+    eight: eight
+    nine: nine
+    clear: clear
+    zero: zero
+    submit: submit
+
+    GridLayout:
+        cols: 3
+
+        Label:
+
+        GridLayout:
+            rows: 4
+
+            Label:
+                size_hint_y: 0.1
+
+            TextInput:
+                id: passkey
+                size_hint_y: 0.2
+
+            GridLayout:
+                cols: 3
+                rows: 4
+                size_hint_x: 0.75
+
+                Button:
+                    id: one
+                    text: '1'
+                    font_size: 80
+                    on_release: root.btn_press(self)
+                Button:
+                    id: two
+                    text: '2'
+                    font_size: 80
+                Button:
+                    id: three
+                    text: '3'
+                    font_size: 80
+
+                Button:
+                    id: four
+                    text: '4'
+                    font_size: 80
+                Button:
+                    id: five
+                    text: '5'
+                    font_size: 80
+                Button:
+                    id: six
+                    text: '6'
+                    font_size: 80
+
+                Button:
+                    id: seven
+                    text: '7'
+                    font_size: 80
+                Button:
+                    id: eight
+                    text: '8'
+                    font_size: 80
+                Button:
+                    id: nine
+                    text: '9'
+                    font_size: 80
+
+                Button:
+                    id: clear
+                    text: 'Clear'
+                    font_size: 40
+                Button:
+                    id: zero
+                    text: '0'
+                    font_size: 80
+                Button:
+                    id: submit
+                    text: 'Submit'
+                    font_size: 40
+
+            Label:
+                size_hint_y: 0.1
+
+        Label:
+
+
+         _______________________________________________________________________________________________________
+        |                               |                 Label                 |                               |
+        |                               |_______________________________________|                               |
+        |                               |                                       |                               |
+        |                               |               TextInput               |                               |
+        |                               |_______________________________________|                               |
+        |                               |            |             |            |                               |
+        |                               |      1     |      2      |      3     |                               |
+        |                               |____________|_____________|____________|                               |
+        |                               |            |             |            |                               |
+        |           Label               |      4     |      5      |      6     |           Label               |
+        |                               |____________|_____________|____________|                               |
+        |                               |            |             |            |                               |
+        |                               |      7     |      8      |      9     |                               |
+        |                               |____________|_____________|____________|                               |
+        |                               |            |             |            |                               |
+        |                               |    Clear   |      0      |   Submit   |                               |
+        |                               |____________|_____________|____________|                               |
+        |                               |                                       |                               |
+        |                               |                 Label                 |                               |
+        |_______________________________________________________________________________________________________|
