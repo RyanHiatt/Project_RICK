@@ -7,8 +7,8 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import ObjectProperty
 from kivy.uix.textinput import TextInput
+from kivy.uix.scrollview import ScrollView
 
 # ----------------------------------------------------------------------------------------------------------------------
 #   Project: RICK
@@ -32,6 +32,11 @@ class LoginScreen(Screen):
 
         """
         -- Description --
+        This screen contains a keypad and a text input. The user will have to input the correct sequence of numerical
+        values and press submit to access the rest of the app. There is also a clear button and an error message popup
+        for clearing wrong inputs and warning users that they input the wrong sequence respectively.
+        
+        -- Example --
         
         
         -- Structure --
@@ -114,7 +119,7 @@ class LoginScreen(Screen):
 class HomeScreen(Screen):
     """
     -- Description --
-
+    The home screen as it implies is the central navigation hub of the whole application. From here
 
     -- Structure --
 
@@ -199,10 +204,84 @@ class AllDrinksScreen(Screen):
 
 
     -- Structure --
-
+    GridLayout:
+        ScrollView:
+            GridLayout:
+                Button (Dynamic):
+        GridLayout:
+            AnchorLayout:
+                Button:
+            Label:
+            AnchorLayout:
+                Button:
     """
 
-    pass
+    def __init__(self, **kwargs):
+        super(AllDrinksScreen, self).__init__(**kwargs)
+
+        # Main Grid
+        main_grid = GridLayout(rows=2)
+
+        # Scroll View
+        scroll = ScrollView(do_scroll_x=False,
+                            bar_width=10,
+                            bar_color=(0, 0, 1, 0.5),
+                            bar_inactive_color=(0, 0, 1, 1),
+                            effect_cls='DampedScrollEffect')
+        # Button Grid
+        btn_grid = GridLayout(cols=4)
+
+        # Buttons
+        for i in range(100):
+            btn_grid.add_widget(Button(text=str(i),
+                                       font_size=40))
+
+        scroll.add_widget(btn_grid)
+
+        # Bottom Row
+        btm_grid = GridLayout(cols=3,
+                              size_hint_y=0.25)
+
+        # Back Button
+        anchor1 = AnchorLayout(anchor_x='left',
+                               anchor_y='bottom',
+                               size_hint_x=0.75,
+                               padding=(8, 10, 5, 5))
+
+        anchor1.add_widget(Button(text='Back',
+                                  font_size=20,
+                                  on_release=self.back))
+
+        btm_grid.add_widget(anchor1)
+
+        # RICK Label
+        label = Label(text='R.I.C.K.',
+                      font_size = 60,
+                      halign='center',
+                      valign='middle')
+        btm_grid.add_widget(label)
+
+        # Categories Button
+        anchor2 = AnchorLayout(anchor_x='left',
+                               anchor_y='bottom',
+                               size_hint_x=0.75,
+                               padding=(8, 10, 5, 5))
+
+        anchor2.add_widget(Button(text='Categories',
+                                  font_size=20,
+                                  on_release=self.categories))
+
+        btm_grid.add_widget(anchor2)
+        main_grid.add_widget(scroll)
+        main_grid.add_widget(btm_grid)
+
+        self.add_widget(main_grid)
+
+    def back(self, *args):
+        self.manager.current = 'home'
+
+    def categories(self, *args):
+        self.manager.current = 'category'
 
 
 class CategoriesScreen(Screen):
