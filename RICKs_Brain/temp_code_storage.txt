@@ -1,175 +1,73 @@
-<LoginScreen>:
-    username: username
-    passwd: passwd
-
-    GridLayout:
-        cols: 3
-
-        Label:
-
-        GridLayout:
-            rows: 8
-
-            Label:
-                text: 'R.I.C.K.'
-                font_size: 100
-
-            GridLayout:
-                cols: 2
-                size_hint_y: 0.3
-
-                Label:
-                    size_hint_x: 0.3
-                    text: 'User ID:'
-                    halign: 'left'
-                    valign: 'bottom'
-
-                Label:
-
-            TextInput:
-                id: username
-                size_hint_y: 0.4
-                font_size: 60
-
-            GridLayout:
-                cols: 2
-                size_hint_y: 0.3
-
-                Label:
-                    size_hint_x: 0.4
-                    text: 'Password:'
-                    halign: 'left'
-                    valign: 'bottom'
-
-                Label:
-
-            TextInput:
-                id: passwd
-                size_hint_y: 0.4
-                font_size: 60
-
-            Label:
-                size_hint_y: 0.2
-
-            GridLayout:
-                cols:2
-                size_hint_y: 0.4
-
-                Button:
-                    text: 'Submit'
-                    size_hint_x: 0.8
-                    pos_hint_y: {'left': 1, 'y': 0.5}
-                    on_release:
-                        root.manager.current = 'home'
-
-                Label:
-
-            Label:
-
-        Label:
+    def __init__(self, **kwargs):
+        super(LoginScreen, self).__init__(**kwargs)
 
 
 
+        # Main Grid
+        main_grid = GridLayout(cols=3)
 
+        # Left Column
+        label1 = Label()
+        main_grid.add_widget(label1)
 
+        # Center Column
+        center_grid = GridLayout(rows=4,
+                                 size_hint_x=1.4)
 
+        label3 = Label(size_hint_y=0.05)
+        center_grid.add_widget(label3)
 
+        # Row 1
+        text = TextInput(size_hint_y=0.2)
+        center_grid.add_widget(text)
 
+        # Row 2
+        key_grid = GridLayout(cols=3, rows=4)
+        center_grid.add_widget(key_grid)
 
+        # Key Grid
+        for i in range(1, 10):
+            btn = Button(text=str(i),
+                         font_size=80,
+                         id='btn' + str(i),
+                         on_release=self.btn_press)
+            key_grid.add_widget(btn)
 
+        key_grid.add_widget(Button(text='Clear',
+                                   font_size=25,
+                                   id='clear',
+                                   on_release=self.btn_press))
+        key_grid.add_widget(Button(text='0',
+                                   font_size=80,
+                                   id='btn0',
+                                   on_release=self.btn_press))
+        key_grid.add_widget(Button(text='Submit',
+                                   font_size=25,
+                                   id='submit',
+                                   on_release=self.submit))
 
-<LoginScreen>:
-    passkey: passkey
-    one: one
-    two: two
-    three: three
-    four: four
-    five: five
-    six: six
-    seven: seven
-    eight: eight
-    nine: nine
-    clear: clear
-    zero: zero
-    submit: submit
+        # Row 3
+        label4 = Label(size_hint_y=0.05)
+        center_grid.add_widget(label4)
 
-    GridLayout:
-        cols: 3
+        # Add Center Grid to Main Grid
+        main_grid.add_widget(center_grid)
 
-        Label:
+        # Right Column
+        label2 = Label()
+        main_grid.add_widget(label2)
 
-        GridLayout:
-            rows: 4
+        # Load Screen
+        self.add_widget(main_grid)
 
-            Label:
-                size_hint_y: 0.1
+    def btn_press(self, instance):
+        print(str(instance))
 
-            TextInput:
-                id: passkey
-                size_hint_y: 0.2
+    def clear_values(self):
+        pass
 
-            GridLayout:
-                cols: 3
-                rows: 4
-                size_hint_x: 0.75
-
-                Button:
-                    id: one
-                    text: '1'
-                    font_size: 80
-                    on_release: root.btn_press(self)
-                Button:
-                    id: two
-                    text: '2'
-                    font_size: 80
-                Button:
-                    id: three
-                    text: '3'
-                    font_size: 80
-
-                Button:
-                    id: four
-                    text: '4'
-                    font_size: 80
-                Button:
-                    id: five
-                    text: '5'
-                    font_size: 80
-                Button:
-                    id: six
-                    text: '6'
-                    font_size: 80
-
-                Button:
-                    id: seven
-                    text: '7'
-                    font_size: 80
-                Button:
-                    id: eight
-                    text: '8'
-                    font_size: 80
-                Button:
-                    id: nine
-                    text: '9'
-                    font_size: 80
-
-                Button:
-                    id: clear
-                    text: 'Clear'
-                    font_size: 40
-                Button:
-                    id: zero
-                    text: '0'
-                    font_size: 80
-                Button:
-                    id: submit
-                    text: 'Submit'
-                    font_size: 40
-
-            Label:
-                size_hint_y: 0.1
-
-        Label:
+    def submit(self, *args):
+        self.manager.current = 'home'
 
 
          _______________________________________________________________________________________________________
@@ -193,3 +91,77 @@
         |                               |                                       |                               |
         |                               |                 Label                 |                               |
         |_______________________________________________________________________________________________________|
+
+
+
+        def __init__(self, **kwargs):
+        super(AllDrinksScreen, self).__init__(**kwargs)
+
+        # Main Grid
+        main_grid = GridLayout(rows=2)
+
+        # Scroll View
+        scroll = ScrollView(do_scroll_x=False,
+                            size_hint=(1, 1),
+                            bar_width=10,
+                            bar_color=(0, 0, 1, 0.5),
+                            bar_inactive_color=(0, 0, 1, 1),
+                            effect_cls='DampedScrollEffect')
+        # Button Grid
+        btn_grid = GridLayout(cols=4,
+                              size_hint_y=None)
+        btn_grid.bind(minimum_height=btn_grid.setter('height'))
+
+        # Buttons
+        for i in range(100):  # Temporarily creates 100 buttons for testing, number will be based on number of drinks.
+            btn_grid.add_widget(Button(text=str(i),
+                                       font_size=20,
+                                       size_hint_y=None,
+                                       height=80))
+
+        scroll.add_widget(btn_grid)
+
+        # Bottom Row
+        bottom_grid = GridLayout(cols=3,
+                                 size_hint_y=0.25)
+
+        # Back Button
+        anchor1 = AnchorLayout(anchor_x='left',
+                               anchor_y='bottom',
+                               size_hint_x=0.75,
+                               padding=(8, 10, 5, 5))
+
+        anchor1.add_widget(Button(text='Back',
+                                  font_size=20,
+                                  on_release=self.go_back_home))
+
+        bottom_grid.add_widget(anchor1)
+
+        # RICK Label
+        label = Label(text='R.I.C.K.',
+                      font_size=60,
+                      halign='center',
+                      valign='middle')
+        bottom_grid.add_widget(label)
+
+        # Categories Button
+        anchor2 = AnchorLayout(anchor_x='left',
+                               anchor_y='bottom',
+                               size_hint_x=0.75,
+                               padding=(8, 10, 5, 5))
+
+        anchor2.add_widget(Button(text='Categories',
+                                  font_size=20,
+                                  on_release=self.go_to_categories_screen))
+
+        bottom_grid.add_widget(anchor2)
+        main_grid.add_widget(scroll)
+        main_grid.add_widget(bottom_grid)
+
+        self.add_widget(main_grid)
+
+    def go_back_home(self, *args):
+        self.manager.current = 'home'
+
+    def go_to_categories_screen(self, *args):
+        self.manager.current = 'category'
