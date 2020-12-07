@@ -9,6 +9,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.textinput import TextInput
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -174,6 +175,7 @@ class HomeScreen(Screen):
         anchor1.add_widget(btn1)
 
         btn_grid.add_widget(anchor1)
+
         # Yes Button
         anchor2 = AnchorLayout(anchor_x='right',
                                anchor_y='bottom')
@@ -299,7 +301,24 @@ class FavoritesScreen(Screen):
 
     """
 
-    pass
+    favorites_layout = ObjectProperty(None)
+
+    def __init__(self, **kwargs):
+        super(FavoritesScreen, self).__init__(**kwargs)
+
+        Clock.schedule_once(self.setup_scrollview, 1)
+
+    def setup_scrollview(self, dt):
+        self.favorites_layout.bind(minimum_height=self.favorites_layout.setter('height'))
+        self.create_drink_btns()
+
+    def create_drink_btns(self):
+        for i in range(10):
+            self.favorites_layout.add_widget(Button(text='Button {}'.format(i + 1),
+                                                    size_hint_y=None,
+                                                    size_hint_x=None,
+                                                    height=180,
+                                                    width=220))
 
 
 class CreateDrinkScreen(Screen):
@@ -314,7 +333,99 @@ class CreateDrinkScreen(Screen):
 
     """
 
-    pass
+    create_drink_layout = ObjectProperty(None)
+
+    def __init__(self, **kwargs):
+        super(CreateDrinkScreen, self).__init__(**kwargs)
+
+        Clock.schedule_once(self.setup_scrollview, 1)
+
+    def setup_scrollview(self, dt):
+        self.create_drink_layout.bind(minimum_height=self.create_drink_layout.setter('height'))
+        self.create_grids()
+
+    def create_grids(self):
+        for i in range(12):
+            new_row = GridLayout(cols=6,
+                                 size_hint_y=None,
+                                 height=75)
+            new_row.add_widget(Label(text='Label %s' % str(i+1),
+                                     font_size=20,
+                                     halign='left',
+                                     valign='middle'))
+            new_row.add_widget(Button(text='-1',
+                                      font_size=20,
+                                      size_hint_x=0.15))
+            new_row.add_widget(Button(text='-.1',
+                                      font_size=20,
+                                      size_hint_x=0.15))
+            new_row.add_widget(TextInput(size_hint_x=0.25))
+            new_row.add_widget(Button(text='+.1',
+                                      font_size=20,
+                                      size_hint_x=0.15))
+            new_row.add_widget(Button(text='+1',
+                                      font_size=20,
+                                      size_hint_x=0.15))
+
+            self.create_drink_layout.add_widget(new_row)
+
+    def confirmation_popup(self):
+        pop = Popup(size_hint=(0.5, 0.5),
+                    auto_dismiss=False,
+                    title='Dispense Drink',
+                    title_align='center',
+                    title_size=30)
+
+        # Main Grid
+        main_grid = GridLayout(rows=2)
+        pop.add_widget(main_grid)
+
+        # Row 1
+        label1 = Label(text='Dispense Drink?',
+                       text_size=self.size,
+                       font_size=50,
+                       halign='center',
+                       valign='middle')
+        main_grid.add_widget(label1)
+
+        # Row 2
+        btn_grid = GridLayout(size_hint_y=0.33,
+                              cols=2)
+
+        # No Button
+        anchor1 = AnchorLayout(anchor_x='left',
+                               anchor_y='bottom')
+        btn1 = Button(width=100,
+                      height=60,
+                      text='NO',
+                      font_size=20,
+                      on_release=pop.dismiss)
+        anchor1.add_widget(btn1)
+
+        btn_grid.add_widget(anchor1)
+
+        # Yes Button
+        anchor2 = AnchorLayout(anchor_x='right',
+                               anchor_y='bottom')
+        btn2 = Button(width=100,
+                      height=60,
+                      text='YES',
+                      font_size=20,
+                      on_press=pop.dismiss)
+        btn2.bind(on_release=self.dispense_drink)
+        btn2.bind(on_release=pop.dismiss)
+        anchor2.add_widget(btn2)
+        btn_grid.add_widget(anchor2)
+
+        # Add Grid 2 to Grid
+        main_grid.add_widget(btn_grid)
+
+        # Open the Popup
+        pop.open()
+
+    def dispense_drink(self, *args):
+        # TODO Dispense Custom Drink
+        pass
 
 
 class MyScreenManager(ScreenManager):

@@ -327,7 +327,7 @@
 			size_hint_y: 0.25
 			text: 'Shots and Neats'
 			text_size: self.size
-			font_size: 80
+			font_size: 60
 			halign: 'center'
 			valign: 'middle'
 
@@ -342,7 +342,7 @@
 					size_hint_x: None
 					size_hint_y: 0.8
 					text: 'Whiskey'
-					font_size: 60
+					font_size: 40
 					on_press: root.open_shotspop()
 
 			AnchorLayout:
@@ -352,7 +352,7 @@
 					size_hint_x: None
 					size_hint_y: 0.8
 					text: 'Vodka'
-					font_size: 60
+					font_size: 40
 					on_press: root.open_shotspop()
 
 			AnchorLayout:
@@ -362,7 +362,7 @@
 					size_hint_x: None
 					size_hint_y: 0.8
 					text: 'Tequila'
-					font_size: 60
+					font_size: 40
 					on_press: root.open_shotspop()
 
 			AnchorLayout:
@@ -372,7 +372,7 @@
 					size_hint_x: None
 					size_hint_y: 0.8
 					text: 'Rum'
-					font_size: 60
+					font_size: 40
 					on_press: root.open_shotspop()
 
 			AnchorLayout:
@@ -382,7 +382,7 @@
 					size_hint_x: None
 					size_hint_y: 0.8
 					text: 'Gin'
-					font_size: 60
+					font_size: 40
 					on_press: root.open_shotspop()
 
 			AnchorLayout:
@@ -392,7 +392,7 @@
 					size_hint_x: None
 					size_hint_y: 0.8
 					text: 'Brandy'
-					font_size: 60
+					font_size: 40
 					on_press: root.open_shotspop()
 
 		AnchorLayout:
@@ -403,7 +403,7 @@
 				size_hint_x: 0.25
 				size_hint_y: 0.85
 				text: 'Back'
-				font_size: 60
+				font_size: 40
 				on_press:
 					root.manager.current = 'home'
 
@@ -416,7 +416,7 @@
 ##       |_|       \__,_|   \_/    \___/  |_|    |_|  \__|  \___| |___/   |_____/   \___| |_|     \___|  \___| |_| |_|
 ## ---------------------------------------------------------------------------------------------------------------------
 <FavoritesScreen>:
-    drink_layout: drink_layout
+    favorites_layout: favorites_layout
 
     GridLayout:
 		rows: 2
@@ -431,7 +431,7 @@
 
 			GridLayout:
 			    cols: 3
-				id: drink_layout
+				id: favorites_layout
 				size_hint_y: None
 				padding: [30, 10, 10, 10]
 				spacing: [40, 20]
@@ -466,10 +466,10 @@
 
                 Button:
                     width: root.width/4 - 30
-                    text: 'Categories'
+                    text: 'Edit'
                     font_size: 20
                     on_release:
-                        root.manager.current = 'category'
+                        root.manager.current = 'home'
 
 
 
@@ -482,3 +482,57 @@
 ##        \_____| |_|     \___|  \__,_|  \__|  \___|   |_____/   \___| |_|     \___|  \___| |_| |_|
 ## ---------------------------------------------------------------------------------------------------------------------
 <CreateDrinkScreen>:
+    create_drink_layout: create_drink_layout
+
+    GridLayout:
+        rows: 2
+
+        ScrollView:
+			do_scroll_x: False
+			size_hint: (1, 1)
+			bar_width: 10
+			bar_color: 0, 0, 1, 0.5
+			bar_inactive_color: 0, 0, 1, 1
+			effect_cls: "DampedScrollEffect"
+
+			GridLayout:
+			    cols: 1
+				id: create_drink_layout
+				size_hint_y: None
+				padding: [5, 5, 20, 5]
+				spacing: [10, 20]
+
+        GridLayout:
+            cols: 3
+            size_hint_y: 0.2
+
+            AnchorLayout:
+                anchor_x: 'left'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [8, 10, 5, 5]
+
+                Button:
+                    text: 'Back'
+                    font_size: 20
+                    on_release:
+                        root.manager.current = 'home'
+
+            Label:
+                text: 'R.I.C.K.'
+                font_size: 60
+                halign: 'center'
+                valign: 'middle'
+
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [5, 10, 8, 5]
+
+                Button:
+                    width: root.width/4 - 30
+                    text: 'Dispense'
+                    font_size: 20
+                    on_release:
+                        root.confirmation_popup()
