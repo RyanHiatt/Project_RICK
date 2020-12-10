@@ -1,3 +1,5 @@
+import json
+
 import kivy
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty
@@ -28,6 +30,7 @@ Window.size = (800, 480)
 # Window.fullscreen = True
 
 PASS_KEY = '8093'
+SELECTED_DRINK = ''
 
 
 class LoginScreen(Screen):
@@ -236,12 +239,40 @@ class AllDrinksScreen(Screen):
         self.create_drink_btns()
 
     def create_drink_btns(self):
-        for i in range(100):
-            self.drink_layout.add_widget(Button(text='Button {}'.format(i+1),
-                                                size_hint_y=None,
-                                                size_hint_x=None,
-                                                height=180,
-                                                width=220))
+        with open('../Dataframe/DrinkDB.json', 'r') as file:
+            drink_db = json.load(file)
+
+        for i in range(len(drink_db['drinks'])):
+            img_path = '../Images/{}'.format(drink_db['drinks'][i]['img'])
+
+            btn_unit = GridLayout(rows=2,
+                                  size_hint_y=None,
+                                  size_hint_x=None,
+                                  height=190,
+                                  width=210)
+
+            btn_unit.add_widget(Button(id=drink_db['drinks'][i]['id'],
+                                       background_normal=img_path,
+                                       size_hint_y=None,
+                                       size_hint_x=None,
+                                       height=160,
+                                       width=210,
+                                       on_release=self.btn_press))
+
+            btn_unit.add_widget(Label(text=drink_db['drinks'][i]['name'],
+                                      font_size=20,
+                                      halign='center',
+                                      valign='bottom',
+                                      size_hint_y=None,
+                                      size_hint_x=None,
+                                      height=30,
+                                      width=210))
+
+            self.drink_layout.add_widget(btn_unit)
+
+    def btn_press(self, instance):
+        SELECTED_DRINK = instance.id
+        self.manager.current = 'dispense'
 
 
 class DispenseScreen(Screen):
@@ -256,7 +287,21 @@ class DispenseScreen(Screen):
 
     """
 
-    pass
+    def __init__(self, **kwargs):
+        super(DispenseScreen, self).__init__(**kwargs)
+
+        Clock.schedule_once(self.setup_dispense_screen, 1)
+
+    def setup_dispense_screen(self, dt):
+        with open('../Dataframe/DrinkDB.json', 'r') as file:
+            drink_db = json.load(file)
+
+        for i in range(len(drink_db['drinks'])):
+            if drink_db['drinks'][i]['id'] == SELECTED_DRINK:
+                drink_profile = drink_db['drinks'][i]
+
+        self.ids.name_label = drink_profile['name']
+
 
 
 class CategoriesScreen(Screen):
@@ -271,6 +316,20 @@ class CategoriesScreen(Screen):
 
     """
 
+    pass
+
+
+class FilteredDrinksScreen(Screen):
+    """
+    -- Description --
+
+
+    -- Usage --
+
+
+    -- Structure --
+
+    """
     pass
 
 

@@ -1,3 +1,20 @@
+sours
+sweets
+highballs
+lowballs
+frozen
+martinis
+
+
+
+
+
+
+
+
+
+
+
     def __init__(self, **kwargs):
         super(LoginScreen, self).__init__(**kwargs)
 

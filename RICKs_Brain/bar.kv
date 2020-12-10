@@ -246,8 +246,8 @@
 			    cols: 3
 				id: drink_layout
 				size_hint_y: None
-				padding: [30, 10, 10, 10]
-				spacing: [40, 20]
+				padding: [30, 5, 10, 5]
+				spacing: [40, 10]
 
 		GridLayout:
             cols: 3
@@ -295,7 +295,59 @@
 ##                          |_|
 ## ---------------------------------------------------------------------------------------------------------------------
 <DispenseScreen>:
+    name_label: name_label
+    ingredient_layout: ingredient_layout
+    garnish_label: garnish_label
+    drink_img: drink_img
+    instructions_label: instructions_label
 
+    GridLayout:
+        cols: 2
+
+        GridLayout:
+            rows: 6
+
+            Label:
+                id: name_label
+
+            GridLayout:
+                cols: 2
+
+                Label:
+                    text: 'Ingredient'
+
+                Label:
+                    text: 'Amount'
+
+            GridLayout:
+                cols: 3
+                id: ingredient_layout
+
+            Label:
+                text: 'Garnish'
+
+            Label:
+                id: garnish_label
+
+            Button:
+                text: 'Cancel'
+                on_release:
+                    root.manager.current = 'drinks'
+
+        GridLayout:
+            rows: 4
+
+            Label:
+                id: drink_img
+
+            Label:
+                text: 'Instructions'
+
+            Label:
+                id: instructions_label
+
+            Button:
+                text: 'Dispense'
 
 ## ---------------------------------------------------------------------------------------------------------------------
 ##         _____           _                                              _____
@@ -308,6 +360,103 @@
 ##                                      |___/                  |___/
 ## ---------------------------------------------------------------------------------------------------------------------
 <CategoriesScreen>:
+
+    GridLayout:
+		rows: 3
+
+		Label:
+			size_hint_y: 0.25
+			text: 'Categories'
+			text_size: self.size
+			font_size: 60
+			halign: 'center'
+			valign: 'middle'
+
+		GridLayout:
+			rows: 2
+			cols: 3
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Sours'
+					font_size: 40
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Highballs'
+					font_size: 40
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Frozen'
+					font_size: 40
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Sweets'
+					font_size: 40
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Lowballs'
+					font_size: 40
+					on_press: root.open_shotspop()
+
+			AnchorLayout:
+				anchor_x: 'center'
+				Button:
+					width: root.width/3.5
+					size_hint_x: None
+					size_hint_y: 0.8
+					text: 'Random'
+					font_size: 40
+					on_press: root.open_shotspop()
+
+		AnchorLayout:
+			size_hint_y: 0.25
+			anchor_x: 'center'
+			anchor_y: 'bottom'
+			Button:
+				size_hint_x: 0.25
+				size_hint_y: 0.85
+				text: 'Back'
+				font_size: 40
+				on_press:
+					root.manager.current = 'home'
+
+## ---------------------------------------------------------------------------------------------------------------------
+##        ______   _   _   _                              _      _____
+##       |  ____| (_) | | | |                            | |    / ____|
+##       | |__     _  | | | |_    ___   _ __    ___    __| |   | (___     ___   _ __    ___    ___   _ __
+##       |  __|   | | | | | __|  / _ \ | '__|  / _ \  / _` |    \___ \   / __| | '__|  / _ \  / _ \ | '_ \
+##       | |      | | | | | |_  |  __/ | |    |  __/ | (_| |    ____) | | (__  | |    |  __/ |  __/ | | | |
+##       |_|      |_| |_|  \__|  \___| |_|     \___|  \__,_|   |_____/   \___| |_|     \___|  \___| |_| |_|
+## ---------------------------------------------------------------------------------------------------------------------
+<FilteredDrinkScreen>:
 
 
 ## ---------------------------------------------------------------------------------------------------------------------
