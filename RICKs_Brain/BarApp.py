@@ -22,6 +22,12 @@ from kivy.uix.textinput import TextInput
 #   Date Started: 11/17/2020
 # ----------------------------------------------------------------------------------------------------------------------
 
+# TODO DrinkDB
+# TODO ShotsDB
+# TODO Keep name R.I.C.K. or change?
+# TODO Exception Handling!!! (Try, Except) Google kivy exception handling
+# TODO Clean up imports
+
 # Current Version of Kivy
 kivy.require('1.11.1')
 
@@ -29,10 +35,16 @@ kivy.require('1.11.1')
 Window.size = (800, 480)
 # Window.fullscreen = True
 
+# TODO Configuration file?
 PASS_KEY = '8093'
 
 
 class LoginScreen(Screen):
+    # TODO Add graphics to left and right of keypad
+    # TODO Determine pass through variables for top left of home screen
+    # TODO Finalize design
+    # TODO Check description, usage, and structure
+
     """
     -- Description --
     This screen contains a keypad and a text input. The user will have to input the correct sequence of numerical
@@ -105,6 +117,13 @@ class LoginScreen(Screen):
 
 
 class HomeScreen(Screen):
+    # TODO Beautify layout
+    # TODO Determine top left component
+    # TODO Configure the clock module
+    # TODO Configure the date module
+    # TODO Finalize layout and design
+    # TODO Check description, usage, and structure
+
     """
     -- Description --
     The home screen as it implies is the central navigation hub of the whole application. From here users can navigate
@@ -142,6 +161,8 @@ class HomeScreen(Screen):
     """
 
     def open_lockpop(self):
+        # TODO Finalize design
+        # TODO Finalize Layout
 
         # Initiate Popup
         pop = Popup(size_hint=(0.5, 0.5),
@@ -202,6 +223,11 @@ class HomeScreen(Screen):
 
 
 class AllDrinksScreen(Screen):
+    # TODO Update description, usage, and structure
+    # TODO Finalize Layout
+    # TODO Finalize Design
+    # TODO Possibly change categories button to filter button
+
     """
     -- Description --
     This screen contains all the drinks available in the bar app. They will be organized alphabetically and displayed in
@@ -270,6 +296,8 @@ class AllDrinksScreen(Screen):
             self.drink_layout.add_widget(btn_unit)
 
     def btn_press(self, instance):
+        # TODO might have to change how selected drink is passed through with dispense screen redesign
+
         global selected_drink
         selected_drink = instance.id
 
@@ -277,6 +305,11 @@ class AllDrinksScreen(Screen):
 
 
 class DispenseScreen(Screen):
+    # TODO Add option to add drink to favorites list
+    # TODO Fill out description, usage, and structure
+    # TODO Convert to more dynamic screen able to work for all drinks, shots, and create drink
+    # TODO Finalize design
+
     """
     -- Description --
 
@@ -326,6 +359,12 @@ class DispenseScreen(Screen):
 
 
 class CategoriesScreen(Screen):
+    # TODO Fill out description, usage, and structure
+    # TODO Search by letter?
+    # TODO Create new design layout (user friendly, and modern)
+    # TODO Define button press
+    # TODO Add images to and from Base_Images
+
     """
     -- Description --
 
@@ -341,6 +380,9 @@ class CategoriesScreen(Screen):
 
 
 class FilteredDrinksScreen(Screen):
+    # TODO Is this needed? Try implementing filter options into all drinks screen
+    # TODO Fill out description, usage, and structure
+
     """
     -- Description --
 
@@ -355,6 +397,11 @@ class FilteredDrinksScreen(Screen):
 
 
 class ShotsScreen(Screen):
+    # TODO Redesign lower portion
+    # TODO New images, no background or black background?
+    # TODO Does this lead into a popup or into a shots 'all drinks screen'?
+    # TODO Fill out description, usage, and structure
+
     """
     -- Description --
 
@@ -370,6 +417,12 @@ class ShotsScreen(Screen):
 
 
 class FavoritesScreen(Screen):
+    # TODO Determine how to add and remove favorites from some sort of list
+    # TODO Fill out description, usage, and structure
+    # TODO Finalize layout
+    # TODO Finalize Design
+    # TODO Screen Label
+
     """
     -- Description --
 
@@ -432,6 +485,10 @@ class FavoritesScreen(Screen):
 
 
 class CreateDrinkScreen(Screen):
+    # TODO Fill out description, usage, and structure
+    # TODO Layout possibly with pictures, simplified and modern
+    # TODO Finalize Layout
+    # TODO Finalize Design
     """
     -- Description --
 
@@ -494,6 +551,8 @@ class CreateDrinkScreen(Screen):
             self.create_drink_layout.add_widget(new_row)
 
     def confirmation_popup(self):
+        # TODO A lot of redesign work
+
         pop = Popup(size_hint=(0.5, 0.5),
                     auto_dismiss=False,
                     title='Dispense Drink',
@@ -549,10 +608,14 @@ class CreateDrinkScreen(Screen):
 
     def dispense_drink(self, *args):
         # TODO Dispense Custom Drink
+        # TODO Sends info to dispense screen where all ingredients and amounts are shown
+        # TODO Custom dispense screen can have image saying custom drink
+
         pass
 
 
 class MyScreenManager(ScreenManager):
+    # TODO check description, and structure, add additional info
     """
     -- Description --
     This object manages all the screens for the application as well as screen transitions.
