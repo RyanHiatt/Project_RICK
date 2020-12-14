@@ -242,7 +242,7 @@ class AllDrinksScreen(Screen):
             drink_db = json.load(file)
 
         for i in range(len(drink_db['drinks'])):
-            img_path = '../Images/{}'.format(drink_db['drinks'][i]['img'])
+            img_path = '../DrinkDB_Images/{}'.format(drink_db['drinks'][i]['img'])
 
             btn_unit = GridLayout(rows=2,
                                   size_hint_y=None,
@@ -306,7 +306,7 @@ class DispenseScreen(Screen):
 
                 self.instructions_label.text = drink_profile['instructions']
 
-                img_path = '../Images/{}'.format(drink_profile['img'])
+                img_path = '../DrinkDB_Images/{}'.format(drink_profile['img'])
                 self.drink_img.source = img_path
 
                 for j in range(len(drink_profile['ingredients'])):
@@ -393,12 +393,42 @@ class FavoritesScreen(Screen):
         self.create_drink_btns()
 
     def create_drink_btns(self):
-        for i in range(10):
-            self.favorites_layout.add_widget(Button(text='Button {}'.format(i + 1),
-                                                    size_hint_y=None,
-                                                    size_hint_x=None,
-                                                    height=180,
-                                                    width=220))
+        with open('../Dataframe/DrinkDB.json', 'r') as file:
+            drink_db = json.load(file)
+
+        for i in range(len(drink_db['drinks'])):
+            img_path = '../DrinkDB_Images/{}'.format(drink_db['drinks'][i]['img'])
+
+            btn_unit = GridLayout(rows=2,
+                                  size_hint_y=None,
+                                  size_hint_x=None,
+                                  height=190,
+                                  width=210)
+
+            btn_unit.add_widget(Button(id=drink_db['drinks'][i]['id'],
+                                       background_normal=img_path,
+                                       size_hint_y=None,
+                                       size_hint_x=None,
+                                       height=160,
+                                       width=210,
+                                       on_release=self.btn_press))
+
+            btn_unit.add_widget(Label(text=drink_db['drinks'][i]['name'],
+                                      font_size=20,
+                                      halign='center',
+                                      valign='bottom',
+                                      size_hint_y=None,
+                                      size_hint_x=None,
+                                      height=30,
+                                      width=210))
+
+            self.favorites_layout.add_widget(btn_unit)
+
+    def btn_press(self, instance):
+        global selected_drink
+        selected_drink = instance.id
+
+        self.manager.current = 'dispense'
 
 
 class CreateDrinkScreen(Screen):
@@ -428,22 +458,36 @@ class CreateDrinkScreen(Screen):
         for i in range(12):
             new_row = GridLayout(cols=6,
                                  size_hint_y=None,
-                                 height=75)
+                                 height=60)
+
             new_row.add_widget(Label(text='Label %s' % str(i+1),
-                                     font_size=20,
+                                     font_size=30,
                                      halign='left',
                                      valign='middle'))
-            new_row.add_widget(Button(text='-1',
+
+            new_row.add_widget(Button(id='btn(-1){}'.format(i),
+                                      text='-1',
                                       font_size=20,
                                       size_hint_x=0.15))
-            new_row.add_widget(Button(text='-.1',
+
+            new_row.add_widget(Button(id='btn(-.25){}'.format(i),
+                                      text='-.25',
                                       font_size=20,
                                       size_hint_x=0.15))
-            new_row.add_widget(TextInput(size_hint_x=0.25))
-            new_row.add_widget(Button(text='+.1',
+
+            new_row.add_widget(TextInput(id='text{}'.format(i),
+                                         size_hint_x=0.25,
+                                         text='0',
+                                         font_size=40,
+                                         multiline=False))
+
+            new_row.add_widget(Button(id='btn(+.25){}'.format(i),
+                                      text='+.25',
                                       font_size=20,
                                       size_hint_x=0.15))
-            new_row.add_widget(Button(text='+1',
+
+            new_row.add_widget(Button(id='btn(+1){}'.format(i),
+                                      text='+1',
                                       font_size=20,
                                       size_hint_x=0.15))
 

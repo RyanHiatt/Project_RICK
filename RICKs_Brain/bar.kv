@@ -536,82 +536,83 @@
 <ShotsScreen>:
 
 	GridLayout:
-		rows: 3
-
-		Label:
-			size_hint_y: 0.25
-			text: 'Shots and Neats'
-			text_size: self.size
-			font_size: 60
-			halign: 'center'
-			valign: 'middle'
+		rows: 2
 
 		GridLayout:
-			rows: 2
-			cols: 3
+		    cols: 5
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Whiskey'
-					font_size: 40
-					on_press: root.open_shotspop()
+		    GridLayout:
+		        rows: 2
+		        padding: [10, 10, 5, 5]
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Vodka'
-					font_size: 40
-					on_press: root.open_shotspop()
+		        Button:
+		            id: whiskey_btn
+		            background_normal: '../Base_Images/Whiskey Bottle.jpg'
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Tequila'
-					font_size: 40
-					on_press: root.open_shotspop()
+		        Label:
+		            text: 'Whiskey'
+		            font_size: 20
+		            size_hint_y: None
+		            height: 40
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Rum'
-					font_size: 40
-					on_press: root.open_shotspop()
+		    GridLayout:
+		        rows: 2
+		        padding: [5, 10, 5, 5]
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Gin'
-					font_size: 40
-					on_press: root.open_shotspop()
+		        Button:
+		            id: vodka_btn
+		            background_normal: '../Base_Images/Vodka Bottle.jpg'
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Brandy'
-					font_size: 40
-					on_press: root.open_shotspop()
+		        Label:
+		            text: 'Vodka'
+		            font_size: 20
+		            size_hint_y: None
+		            height: 40
+
+		    GridLayout:
+		        rows: 2
+		        padding: [5, 10, 5, 5]
+
+		        Button:
+		            id: tequila_btn
+		            background_normal: '../Base_Images/Tequila Bottle.jpg'
+
+		        Label:
+		            text: 'Tequila'
+		            font_size: 20
+		            size_hint_y: None
+		            height: 40
+
+		    GridLayout:
+		        rows: 2
+		        padding: [5, 10, 5, 5]
+
+		        Button:
+		            id: rum_btn
+		            background_normal: '../Base_Images/Rum Bottle.png'
+
+		        Label:
+		            text: 'Rum'
+		            font_size: 20
+		            size_hint_y: None
+		            height: 40
+
+		    GridLayout:
+		        rows: 2
+		        padding: [5, 10, 10, 5]
+
+		        Button:
+		            id: gin_btn
+		            background_normal: '../Base_Images/Gin Bottle.jpg'
+
+		        Label:
+		            text: 'Gin'
+		            font_size: 20
+		            size_hint_y: None
+		            height: 40
 
 		AnchorLayout:
-			size_hint_y: 0.25
+			size_hint_y: 0.15
 			anchor_x: 'center'
 			anchor_y: 'bottom'
 			Button:
@@ -648,8 +649,8 @@
 			    cols: 3
 				id: favorites_layout
 				size_hint_y: None
-				padding: [30, 10, 10, 10]
-				spacing: [40, 20]
+				padding: [30, 5, 10, 5]
+				spacing: [40, 10]
 
 		GridLayout:
             cols: 3
@@ -714,7 +715,7 @@
 			    cols: 1
 				id: create_drink_layout
 				size_hint_y: None
-				padding: [5, 5, 20, 5]
+				padding: [5, 5, 10, 5]
 				spacing: [10, 20]
 
         GridLayout:
