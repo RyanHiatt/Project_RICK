@@ -11,7 +11,7 @@ import requests
 with open('../Dataframe/DrinkDB.json', 'r') as file:
     drink_db = json.load(file)
 
-print(drink_db['drinks'][0]['img'])
+print(drink_db['drinks'][0]['ingredients']['ingredient0'])
 
 # for i in drinkdb['drinks'][0]['id']:
 #     print(i)

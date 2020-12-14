@@ -7,6 +7,29 @@ martinis
 
 
 
+"ingredient0": "Whiskey",
+        "ingredient1": "Amaretto",
+        "ingredient2": "Sloe Gin",
+        "ingredient3": "Lemon Juice",
+        "ingredient4": null,
+        "ingredient5": null,
+        "ingredient6": null,
+        "ingredient7": null,
+        "ingredient8": null,
+        "ingredient9": null
+
+"measures": {
+        "measure0": 1,
+        "measure1": 1,
+        "measure2": 0.5,
+        "measure3": 1,
+        "measure4": null,
+        "measure5": null,
+        "measure6": null,
+        "measure7": null,
+        "measure8": null,
+        "measure9": null
+
 
 
 

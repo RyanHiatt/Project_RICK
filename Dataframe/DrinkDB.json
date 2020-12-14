@@ -6,27 +6,19 @@
       "category": "Highball",
       "img": "Alabama Slammer.jpg",
       "instructions": "Stir and serve.",
-      "garnish": null,
-      "ingredient0": "Whiskey",
-      "ingredient1": "Amaretto",
-      "ingredient2": "Sloe Gin",
-      "ingredient3": "Lemon Juice",
-      "ingredient4": null,
-      "ingredient5": null,
-      "ingredient6": null,
-      "ingredient7": null,
-      "ingredient8": null,
-      "ingredient9": null,
-      "measure0": 1,
-      "measure1": 1,
-      "measure2": 0.5,
-      "measure3": 1,
-      "measure4": null,
-      "measure5": null,
-      "measure6": null,
-      "measure7": null,
-      "measure8": null,
-      "measure9": null
+      "garnish": "None",
+      "ingredients": [
+        "Whiskey",
+        "Amaretto",
+        "Sloe Gin",
+        "Lemon Juice"
+      ],
+      "measures": [
+        1,
+        1,
+        0.5,
+        1
+      ]
     },
     {
       "id": "B0001",
@@ -35,26 +27,14 @@
       "img": "Blue Lagoon.jpg",
       "instructions": "Fill with lemonade and serve.",
       "garnish": "Maraschino Cherry",
-      "ingredient0": "Vodka",
-      "ingredient1": "Blue Curacao",
-      "ingredient2": null,
-      "ingredient3": null,
-      "ingredient4": null,
-      "ingredient5": null,
-      "ingredient6": null,
-      "ingredient7": null,
-      "ingredient8": null,
-      "ingredient9": null,
-      "measure0": 1,
-      "measure1": 1,
-      "measure2": null,
-      "measure3": null,
-      "measure4": null,
-      "measure5": null,
-      "measure6": null,
-      "measure7": null,
-      "measure8": null,
-      "measure9": null
+      "ingredients": [
+        "Vodka",
+        "Blue Curacao"
+      ],
+      "measures": [
+        1,
+        1
+      ]
     },
     {
       "id": "C0001",
@@ -63,26 +43,14 @@
       "img": "Cape Codder.jpg",
       "instructions": "Stir and serve.",
       "garnish": "Lime Wedge",
-      "ingredient0": "Cranberry Juice",
-      "ingredient1": "Vodka",
-      "ingredient2": null,
-      "ingredient3": null,
-      "ingredient4": null,
-      "ingredient5": null,
-      "ingredient6": null,
-      "ingredient7": null,
-      "ingredient8": null,
-      "ingredient9": null,
-      "measure0": 3,
-      "measure1": 2,
-      "measure2": null,
-      "measure3": null,
-      "measure4": null,
-      "measure5": null,
-      "measure6": null,
-      "measure7": null,
-      "measure8": null,
-      "measure9": null
+      "ingredients": [
+        "Cranberry Juice",
+        "Vodka"
+      ],
+      "measures": [
+        3,
+        2
+      ]
     },
     {
       "id": "D0001",
@@ -91,26 +59,12 @@
       "img": "Dark and Stormy.jpg",
       "instructions": "Top off with ginger beer.",
       "garnish": "Lime Wedge",
-      "ingredient0": "Dark Rum",
-      "ingredient1": null,
-      "ingredient2": null,
-      "ingredient3": null,
-      "ingredient4": null,
-      "ingredient5": null,
-      "ingredient6": null,
-      "ingredient7": null,
-      "ingredient8": null,
-      "ingredient9": null,
-      "measure0": 2,
-      "measure1": null,
-      "measure2": null,
-      "measure3": null,
-      "measure4": null,
-      "measure5": null,
-      "measure6": null,
-      "measure7": null,
-      "measure8": null,
-      "measure9": null
+      "ingredients": [
+        "Dark Rum"
+      ],
+      "measures": [
+        2
+      ]
     },
     {
       "id": "G0001",
@@ -119,26 +73,16 @@
       "img": "Gin Rickey.jpg",
       "instructions": "Top off with soda water.",
       "garnish": "Lime or Lemon Wedge",
-      "ingredient0": "Gin",
-      "ingredient1": "Grenadine",
-      "ingredient2": "Lemon Juice",
-      "ingredient3": null,
-      "ingredient4": null,
-      "ingredient5": null,
-      "ingredient6": null,
-      "ingredient7": null,
-      "ingredient8": null,
-      "ingredient9": null,
-      "measure0": 2,
-      "measure1": 0.5,
-      "measure2": 1,
-      "measure3": null,
-      "measure4": null,
-      "measure5": null,
-      "measure6": null,
-      "measure7": null,
-      "measure8": null,
-      "measure9": null
+      "ingredients": [
+        "Gin",
+        "Grenadine",
+        "Lemon Juice"
+      ],
+      "measures": [
+        2,
+        0.5,
+        1
+      ]
     }
   ]
 }

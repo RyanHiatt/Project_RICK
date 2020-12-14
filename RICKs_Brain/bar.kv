@@ -31,6 +31,7 @@
                 id: passkey
                 size_hint_y: 0.2
                 font_size: 75
+                multiline: False
 
             GridLayout:
                 cols: 3
@@ -302,52 +303,117 @@
     instructions_label: instructions_label
 
     GridLayout:
-        cols: 2
+        rows: 2
 
         GridLayout:
-            rows: 6
-
-            Label:
-                id: name_label
+            cols: 2
 
             GridLayout:
-                cols: 2
+                rows: 5
 
                 Label:
-                    text: 'Ingredient'
+                    id: name_label
+                    size_hint_y: None
+                    height: 50
+                    font_size: 30
+                    halign: 'left'
+                    valign: 'top'
+
+                GridLayout:
+                    cols: 2
+                    size_hint_y: None
+                    height: 40
+
+                    Label:
+                        text: 'Ingredient'
+                        text_size: self.size
+                        halign: 'center'
+                        valign: 'bottom'
+                        font_size: 20
+                        bold: True
+                        underline: True
+                        padding_x: 20
+
+                    Label:
+                        text: 'Amount'
+                        text_size: self.size
+                        halign: 'center'
+                        valign: 'bottom'
+                        font_size: 20
+                        bold: True
+                        underline: True
+                        padding_x: 20
+
+                GridLayout:
+                    cols: 2
+                    id: ingredient_layout
+                    size: self.size
 
                 Label:
-                    text: 'Amount'
+                    text: 'Garnish'
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'bottom'
+                    size_hint_y: None
+                    height: 30
+                    font_size: 20
+                    bold: True
+                    underline: True
+
+                Label:
+                    id: garnish_label
+                    size_hint_y: None
+                    height: 50
+                    font_size: 20
+
+
 
             GridLayout:
-                cols: 3
-                id: ingredient_layout
+                rows: 4
 
-            Label:
-                text: 'Garnish'
+                Label:
+                    size_hint_y: None
+                    height: 10
 
-            Label:
-                id: garnish_label
+                Image:
+                    id: drink_img
+                    size: self.texture_size
+
+                Label:
+                    text: 'Instructions'
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'bottom'
+                    size_hint_y: None
+                    height: 30
+                    font_size: 20
+                    bold: True
+                    underline: True
+
+                Label:
+                    id: instructions_label
+                    size_hint_y: None
+                    height: 50
+                    font_size: 20
+                    multiline: True
+
+        GridLayout:
+            cols: 3
+            size_hint_y: None
+            height: 80
 
             Button:
-                text: 'Cancel'
+                text: 'Back'
+                font_size: 25
                 on_release:
                     root.manager.current = 'drinks'
 
-        GridLayout:
-            rows: 4
-
             Label:
-                id: drink_img
-
-            Label:
-                text: 'Instructions'
-
-            Label:
-                id: instructions_label
+                size_hint_x: 0.05
 
             Button:
                 text: 'Dispense'
+                font_size: 25
 
 ## ---------------------------------------------------------------------------------------------------------------------
 ##         _____           _                                              _____

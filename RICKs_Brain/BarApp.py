@@ -30,7 +30,6 @@ Window.size = (800, 480)
 # Window.fullscreen = True
 
 PASS_KEY = '8093'
-SELECTED_DRINK = ''
 
 
 class LoginScreen(Screen):
@@ -192,7 +191,7 @@ class HomeScreen(Screen):
         anchor2.add_widget(btn2)
         btn_grid.add_widget(anchor2)
 
-        # Add Grid 2 to Grid
+        # Add Grid 2 to Main Grid
         main_grid.add_widget(btn_grid)
 
         # Open the Popup
@@ -271,7 +270,9 @@ class AllDrinksScreen(Screen):
             self.drink_layout.add_widget(btn_unit)
 
     def btn_press(self, instance):
-        SELECTED_DRINK = instance.id
+        global selected_drink
+        selected_drink = instance.id
+
         self.manager.current = 'dispense'
 
 
@@ -287,21 +288,41 @@ class DispenseScreen(Screen):
 
     """
 
-    def __init__(self, **kwargs):
-        super(DispenseScreen, self).__init__(**kwargs)
-
-        Clock.schedule_once(self.setup_dispense_screen, 1)
+    def on_enter(self, *args):
+        Clock.schedule_once(self.setup_dispense_screen)
 
     def setup_dispense_screen(self, dt):
         with open('../Dataframe/DrinkDB.json', 'r') as file:
             drink_db = json.load(file)
 
         for i in range(len(drink_db['drinks'])):
-            if drink_db['drinks'][i]['id'] == SELECTED_DRINK:
+
+            if drink_db['drinks'][i]['id'] == selected_drink:
                 drink_profile = drink_db['drinks'][i]
 
-        self.ids.name_label = drink_profile['name']
+                self.name_label.text = drink_profile['name']
 
+                self.garnish_label.text = drink_profile['garnish']
+
+                self.instructions_label.text = drink_profile['instructions']
+
+                img_path = '../Images/{}'.format(drink_profile['img'])
+                self.drink_img.source = img_path
+
+                for j in range(len(drink_profile['ingredients'])):
+
+                    if j == 0:
+                        self.ingredient_layout.clear_widgets()
+
+                    self.ingredient_layout.add_widget(Label(text=drink_profile['ingredients'][j],
+                                                            font_size=20,
+                                                            size_hint_y=None,
+                                                            height=30))
+
+                    self.ingredient_layout.add_widget(Label(text=str(drink_profile['measures'][j]) + ' OZ',
+                                                            font_size=20,
+                                                            size_hint_y=None,
+                                                            height=30))
 
 
 class CategoriesScreen(Screen):
