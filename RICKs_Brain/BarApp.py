@@ -1,4 +1,5 @@
 import json
+import time
 
 import kivy
 from kivy.clock import Clock
@@ -25,7 +26,7 @@ from kivy.uix.textinput import TextInput
 # TODO DrinkDB
 # TODO ShotsDB
 # TODO Keep name R.I.C.K. or change?
-# TODO Exception Handling!!! (Try, Except) Google kivy exception handling
+# TODO Exception Handling! (Try, Except) Google kivy exception handling
 # TODO Clean up imports
 
 # Current Version of Kivy
@@ -85,6 +86,7 @@ class LoginScreen(Screen):
             LoginScreen.current_key = ''
             self.manager.current = 'home'
 
+        # If the key is incorrect, the else statement runs
         else:
             self.ids.passkey.text = ''
             LoginScreen.current_key = ''
@@ -160,6 +162,24 @@ class HomeScreen(Screen):
                 Button:
     """
 
+    def __init__(self, **kwargs):
+        super(HomeScreen, self).__init__(**kwargs)
+
+        # Kivy Schedule update clock callback once every second
+        Clock.schedule_interval(self.update_clock, 1)
+
+    def update_clock(self, dt):
+        # Get the current time
+        now = time.time()
+
+        # Set the time Criteria
+        local_time = time.localtime(now)
+        time_format = '%H:%M:%S'
+        time_stamp = time.strftime(time_format, local_time)
+
+        # Update the time on the home screen
+        self.clock_label.text = time_stamp
+
     def open_lockpop(self):
         # TODO Finalize design
         # TODO Finalize Layout
@@ -210,6 +230,7 @@ class HomeScreen(Screen):
         btn2.bind(on_release=self.exit_pop)
         btn2.bind(on_release=pop.dismiss)
         anchor2.add_widget(btn2)
+
         btn_grid.add_widget(anchor2)
 
         # Add Grid 2 to Main Grid
@@ -218,6 +239,7 @@ class HomeScreen(Screen):
         # Open the Popup
         pop.open()
 
+    # If Yes ('Sign Out') is clicked this function sets the screen to login screen
     def exit_pop(self, *args):
         self.manager.current = 'login'
 
@@ -259,23 +281,33 @@ class AllDrinksScreen(Screen):
 
         Clock.schedule_once(self.setup_scrollview, 1)
 
+    # Sets up the size of child widget to be scrollable and initiates building of child widgets
     def setup_scrollview(self, dt):
         self.drink_layout.bind(minimum_height=self.drink_layout.setter('height'))
+
         self.create_drink_btns()
 
+    # Creates a drink layout with button, label, and all respective properties for each drink in DrinkDB
     def create_drink_btns(self):
+
+        # Opens DrinkDB file
         with open('../Dataframe/DrinkDB.json', 'r') as file:
             drink_db = json.load(file)
 
+        # Iterates through each drink
         for i in range(len(drink_db['drinks'])):
-            img_path = '../DrinkDB_Images/{}'.format(drink_db['drinks'][i]['img'])
 
+            # Creates the path to each image
+            img_path = '../Images/DrinkDB_Images/{}'.format(drink_db['drinks'][i]['img'])
+
+            # Unit GridLayout
             btn_unit = GridLayout(rows=2,
                                   size_hint_y=None,
                                   size_hint_x=None,
                                   height=190,
                                   width=210)
 
+            # Button/Image
             btn_unit.add_widget(Button(id=drink_db['drinks'][i]['id'],
                                        background_normal=img_path,
                                        size_hint_y=None,
@@ -284,6 +316,7 @@ class AllDrinksScreen(Screen):
                                        width=210,
                                        on_release=self.btn_press))
 
+            # Name Label
             btn_unit.add_widget(Label(text=drink_db['drinks'][i]['name'],
                                       font_size=20,
                                       halign='center',
@@ -293,8 +326,10 @@ class AllDrinksScreen(Screen):
                                       height=30,
                                       width=210))
 
+            # Create layout
             self.drink_layout.add_widget(btn_unit)
 
+    # On the press of any drink button do this
     def btn_press(self, instance):
         # TODO might have to change how selected drink is passed through with dispense screen redesign
 
@@ -450,7 +485,7 @@ class FavoritesScreen(Screen):
             drink_db = json.load(file)
 
         for i in range(len(drink_db['drinks'])):
-            img_path = '../DrinkDB_Images/{}'.format(drink_db['drinks'][i]['img'])
+            img_path = '../Images/DrinkDB_Images/{}'.format(drink_db['drinks'][i]['img'])
 
             btn_unit = GridLayout(rows=2,
                                   size_hint_y=None,

@@ -7,18 +7,12 @@
       "img": "Alabama Slammer.jpg",
       "instructions": "Stir and serve.",
       "garnish": "None",
-      "ingredients": [
-        "Whiskey",
-        "Amaretto",
-        "Sloe Gin",
-        "Lemon Juice"
-      ],
-      "measures": [
-        1,
-        1,
-        0.5,
-        1
-      ]
+      "ingredients": {
+        "Whiskey": 1,
+        "Amaretto": 1,
+        "Sloe Gin": 0.5,
+        "Lemon Juice": 1
+      }
     },
     {
       "id": "B0001",
@@ -27,14 +21,10 @@
       "img": "Blue Lagoon.jpg",
       "instructions": "Fill with lemonade and serve.",
       "garnish": "Maraschino Cherry",
-      "ingredients": [
-        "Vodka",
-        "Blue Curacao"
-      ],
-      "measures": [
-        1,
-        1
-      ]
+      "ingredients": {
+        "Vodka":  1,
+        "Blue Curacao": 1
+      }
     },
     {
       "id": "C0001",
@@ -43,14 +33,10 @@
       "img": "Cape Codder.jpg",
       "instructions": "Stir and serve.",
       "garnish": "Lime Wedge",
-      "ingredients": [
-        "Cranberry Juice",
-        "Vodka"
-      ],
-      "measures": [
-        3,
-        2
-      ]
+      "ingredients": {
+        "Cranberry Juice":  3,
+        "Vodka": 2
+      }
     },
     {
       "id": "D0001",
@@ -59,12 +45,9 @@
       "img": "Dark and Stormy.jpg",
       "instructions": "Top off with ginger beer.",
       "garnish": "Lime Wedge",
-      "ingredients": [
-        "Dark Rum"
-      ],
-      "measures": [
-        2
-      ]
+      "ingredients": {
+        "Dark Rum": 2
+      }
     },
     {
       "id": "G0001",
@@ -73,16 +56,26 @@
       "img": "Gin Rickey.jpg",
       "instructions": "Top off with soda water.",
       "garnish": "Lime or Lemon Wedge",
-      "ingredients": [
-        "Gin",
-        "Grenadine",
-        "Lemon Juice"
-      ],
-      "measures": [
-        2,
-        0.5,
-        1
-      ]
+      "ingredients": {
+        "Gin": 2,
+        "Grenadine": 0.5,
+        "Lemon Juice": 1
+      }
+    }
+  ],
+
+  "shots": [
+    {
+      "id": "SH001",
+      "name": "Vodka Shot",
+      "liquor": "Vodka",
+      "img": "s",
+      "instructions": "s",
+      "chaser": "s",
+      "ingredients": {
+        "Vodka": 0.75,
+        "Grenadine": 0.25
+      }
     }
   ]
 }
