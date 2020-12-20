@@ -109,6 +109,7 @@
 ## ---------------------------------------------------------------------------------------------------------------------
 <HomeScreen>:
     clock_label: clock_label
+    date_label: date_label
 
     GridLayout:
         rows: 3
@@ -134,8 +135,8 @@
                 valign: 'middle'
 
             Label:
+                id: date_label
                 size_hint_x: 0.75
-                text: 'Date: 11/17/2020'
                 text_size: self.size
                 font_size: 20
                 halign: 'right'
@@ -718,6 +719,51 @@
 				size_hint_y: None
 				padding: [5, 5, 10, 5]
 				spacing: [10, 20]
+
+				GridLayout:
+				    cols:7
+				    size_hint_y: None
+				    height: 60
+
+				    Label:
+				        text: 'Ingredient'
+				        font_size: 40
+				        text_size: (450, self.height)
+				        halign: 'left'
+				        valign: 'middle'
+				        bold: True
+				        underline: True
+
+				    Label:
+				        text: 'Type'
+				        font_size: 40
+				        text_size: (300, self.height)
+				        halign: 'left'
+				        valign: 'middle'
+				        bold: True
+				        underline: True
+
+				    Label:
+				        size_hint_x: 0.15
+
+				    Label:
+				        size_hint_x: 0.15
+
+				    Label:
+				        text: 'Amount'
+				        font_size: 40
+				        size_hint_x: 0.25
+				        text_size: (450, self.height)
+				        halign: 'center'
+				        valign: 'middle'
+				        bold: True
+				        underline: True
+
+				    Label:
+				        size_hint_x: 0.15
+
+				    Label:
+				        size_hint_x: 0.15
 
         GridLayout:
             cols: 3

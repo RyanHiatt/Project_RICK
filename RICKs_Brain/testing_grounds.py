@@ -20,5 +20,9 @@ import pandas as pd
 
 
 on_hand = pd.read_csv('../Dataframe/OnHand.csv')
+print(on_hand.loc[2, 'Name'])
 
-print(on_hand.head(16))
+
+# drinkdb = pd.read_json('../Dataframe/DrinkDB.json')
+#
+# print(drinkdb)

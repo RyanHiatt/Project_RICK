@@ -1,5 +1,7 @@
 import json
 import time
+import datetime
+import pandas as pd
 
 import kivy
 from kivy.clock import Clock
@@ -121,8 +123,6 @@ class LoginScreen(Screen):
 class HomeScreen(Screen):
     # TODO Beautify layout
     # TODO Determine top left component
-    # TODO Configure the clock module
-    # TODO Configure the date module
     # TODO Finalize layout and design
     # TODO Check description, usage, and structure
 
@@ -165,8 +165,14 @@ class HomeScreen(Screen):
     def __init__(self, **kwargs):
         super(HomeScreen, self).__init__(**kwargs)
 
-        # Kivy Schedule update clock callback once every second
+        # Kivy schedule update_clock callback once every second
         Clock.schedule_interval(self.update_clock, 1)
+
+        # Kivy schedule update_date callback only once to set date
+        Clock.schedule_once(self.update_date, 1)
+
+        # Kivy schedule interval to check for new date every hour
+        Clock.schedule_interval(self.update_date, 3600)
 
     def update_clock(self, dt):
         # Get the current time
@@ -179,6 +185,17 @@ class HomeScreen(Screen):
 
         # Update the time on the home screen
         self.clock_label.text = time_stamp
+
+    def update_date(self, dt):
+        # Get the current time/date
+        today = datetime.date.today()
+
+        # Set the date Criteria
+        date_format = '%m-%d-%y'
+        date_stamp = today.strftime(date_format)
+
+        # Update the date on the home screen
+        self.date_label.text = date_stamp
 
     def open_lockpop(self):
         # TODO Finalize design
@@ -356,6 +373,7 @@ class DispenseScreen(Screen):
 
     """
 
+    # This method tells the screen to update its parameters upon entering
     def on_enter(self, *args):
         Clock.schedule_once(self.setup_dispense_screen)
 
@@ -547,43 +565,85 @@ class CreateDrinkScreen(Screen):
         self.create_grids()
 
     def create_grids(self):
-        for i in range(12):
-            new_row = GridLayout(cols=6,
+        on_hand = pd.read_csv('../Dataframe/OnHand.csv')
+        on_hand = on_hand.sort_values(by='Name', ascending=True)
+
+        for i in on_hand.index:
+            new_row = GridLayout(cols=7,
                                  size_hint_y=None,
                                  height=60)
 
-            new_row.add_widget(Label(text='Label %s' % str(i+1),
+            # Name Label
+            new_row.add_widget(Label(text=on_hand.loc[i, 'Name'],
                                      font_size=30,
+                                     text_size=(400, self.height),
                                      halign='left',
-                                     valign='middle'))
+                                     valign='middle',
+                                     multiline=False))
 
-            new_row.add_widget(Button(id='btn(-1){}'.format(i),
+            # Ingredient ID
+            new_row.add_widget(Label(id=on_hand.loc[i, 'ID'],
+                                     text=on_hand.loc[i, 'ID'],
+                                     font_size=30,
+                                     text_size=(250, self.height),
+                                     halign='left',
+                                     valign='middle',
+                                     multiline=False))
+
+            # -1 Button
+            new_row.add_widget(Button(id='btn(-1)_{}'.format(i),
                                       text='-1',
                                       font_size=20,
-                                      size_hint_x=0.15))
+                                      size_hint_x=0.15,
+                                      on_release=self.btn_press))
 
-            new_row.add_widget(Button(id='btn(-.25){}'.format(i),
+            # -.25 Button
+            new_row.add_widget(Button(id='btn(-.25)_{}'.format(i),
                                       text='-.25',
                                       font_size=20,
-                                      size_hint_x=0.15))
+                                      size_hint_x=0.15,
+                                      on_release=self.btn_press))
 
-            new_row.add_widget(TextInput(id='text{}'.format(i),
+            # Text Input
+            new_row.add_widget(TextInput(id=''.format(i),
                                          size_hint_x=0.25,
                                          text='0',
                                          font_size=40,
                                          multiline=False))
 
-            new_row.add_widget(Button(id='btn(+.25){}'.format(i),
+            # +.25 Button
+            new_row.add_widget(Button(id='btn(+.25)_{}'.format(i),
                                       text='+.25',
                                       font_size=20,
-                                      size_hint_x=0.15))
+                                      size_hint_x=0.15,
+                                      on_release=self.btn_press))
 
-            new_row.add_widget(Button(id='btn(+1){}'.format(i),
+            # +1 Button
+            new_row.add_widget(Button(id='btn(+1)_{}'.format(i),
                                       text='+1',
                                       font_size=20,
-                                      size_hint_x=0.15))
+                                      size_hint_x=0.15,
+                                      on_release=self.btn_press))
 
+            # Add row to layout
             self.create_drink_layout.add_widget(new_row)
+
+    def btn_press(self, instance):
+        id_pressed = instance.id
+        index = id_pressed.split('_')[1]
+
+        if '(-1)' in id_pressed:
+            for child in self.children:
+                print(child)
+
+        elif '(-.25)' in id_pressed:
+            pass
+
+        elif '(+.25)' in id_pressed:
+            pass
+
+        elif '(+1)' in id_pressed:
+            pass
 
     def confirmation_popup(self):
         # TODO A lot of redesign work
