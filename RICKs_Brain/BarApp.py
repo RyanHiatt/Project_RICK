@@ -244,6 +244,7 @@ class HomeScreen(Screen):
                       text='YES',
                       font_size=20,
                       on_press=pop.dismiss)
+
         btn2.bind(on_release=self.exit_pop)
         btn2.bind(on_release=pop.dismiss)
         anchor2.add_widget(btn2)
@@ -325,8 +326,7 @@ class AllDrinksScreen(Screen):
                                   width=210)
 
             # Button/Image
-            btn_unit.add_widget(Button(id=drink_db['drinks'][i]['id'],
-                                       background_normal=img_path,
+            btn_unit.add_widget(Button(background_normal=img_path,
                                        size_hint_y=None,
                                        size_hint_x=None,
                                        height=160,
@@ -511,8 +511,7 @@ class FavoritesScreen(Screen):
                                   height=190,
                                   width=210)
 
-            btn_unit.add_widget(Button(id=drink_db['drinks'][i]['id'],
-                                       background_normal=img_path,
+            btn_unit.add_widget(Button(background_normal=img_path,
                                        size_hint_y=None,
                                        size_hint_x=None,
                                        height=160,
@@ -582,8 +581,7 @@ class CreateDrinkScreen(Screen):
                                      multiline=False))
 
             # Ingredient ID
-            new_row.add_widget(Label(id=on_hand.loc[i, 'ID'],
-                                     text=on_hand.loc[i, 'ID'],
+            new_row.add_widget(Label(text=on_hand.loc[i, 'ID'],
                                      font_size=30,
                                      text_size=(250, self.height),
                                      halign='left',
@@ -591,36 +589,31 @@ class CreateDrinkScreen(Screen):
                                      multiline=False))
 
             # -1 Button
-            new_row.add_widget(Button(id='btn(-1)_{}'.format(i),
-                                      text='-1',
+            new_row.add_widget(Button(text='-1',
                                       font_size=20,
                                       size_hint_x=0.15,
                                       on_release=self.btn_press))
 
             # -.25 Button
-            new_row.add_widget(Button(id='btn(-.25)_{}'.format(i),
-                                      text='-.25',
+            new_row.add_widget(Button(text='-.25',
                                       font_size=20,
                                       size_hint_x=0.15,
                                       on_release=self.btn_press))
 
             # Text Input
-            new_row.add_widget(TextInput(id=''.format(i),
-                                         size_hint_x=0.25,
+            new_row.add_widget(TextInput(size_hint_x=0.25,
                                          text='0',
                                          font_size=40,
                                          multiline=False))
 
             # +.25 Button
-            new_row.add_widget(Button(id='btn(+.25)_{}'.format(i),
-                                      text='+.25',
+            new_row.add_widget(Button(text='+.25',
                                       font_size=20,
                                       size_hint_x=0.15,
                                       on_release=self.btn_press))
 
             # +1 Button
-            new_row.add_widget(Button(id='btn(+1)_{}'.format(i),
-                                      text='+1',
+            new_row.add_widget(Button(text='+1',
                                       font_size=20,
                                       size_hint_x=0.15,
                                       on_release=self.btn_press))
