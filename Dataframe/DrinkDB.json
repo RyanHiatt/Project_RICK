@@ -1,7 +1,6 @@
 {
   "drinks": [
     {
-      "id": "A0001",
       "name": "Alabama Slammer",
       "category": "Highball",
       "img": "Alabama Slammer.jpg",
@@ -15,7 +14,6 @@
       }
     },
     {
-      "id": "B0001",
       "name": "Blue Lagoon",
       "category": "Sour",
       "img": "Blue Lagoon.jpg",
@@ -27,7 +25,6 @@
       }
     },
     {
-      "id": "C0001",
       "name": "Cape Codder",
       "category": "Sweet",
       "img": "Cape Codder.jpg",
@@ -39,7 +36,6 @@
       }
     },
     {
-      "id": "D0001",
       "name": "Dark & Stormy",
       "category": "Highball",
       "img": "Dark and Stormy.jpg",
@@ -50,7 +46,6 @@
       }
     },
     {
-      "id": "G0001",
       "name": "Gin Rickey",
       "category": "Highball",
       "img": "Gin Rickey.jpg",
@@ -66,15 +61,53 @@
 
   "shots": [
     {
-      "id": "SH001",
       "name": "Vodka Shot",
       "liquor": "Vodka",
-      "img": "s",
-      "instructions": "s",
-      "chaser": "s",
+      "img": "Vodka Bottle.jpg",
+      "instructions": "Drink It",
+      "chaser": "None",
       "ingredients": {
-        "Vodka": 0.75,
-        "Grenadine": 0.25
+        "Vodka": 1
+      }
+    },
+    {
+      "name": "Whiskey Shot",
+      "liquor": "Whiskey",
+      "img": "Whiskey Bottle.jpg",
+      "instructions": "Drink It",
+      "chaser": "None",
+      "ingredients": {
+        "Whiskey": 1
+      }
+    },
+    {
+      "name": "Tequila Shot",
+      "liquor": "Tequila",
+      "img": "Tequila Bottle.jpg",
+      "instructions": "Drink It",
+      "chaser": "None",
+      "ingredients": {
+        "Tequila": 1
+      }
+    },
+    {
+      "name": "Rum Shot",
+      "liquor": "Rum",
+      "img": "Rum Bottle.png",
+      "instructions": "Drink It",
+      "chaser": "None",
+      "ingredients": {
+        "Rum": 1
+      }
+    },
+    {
+      "name": "Gin Shot",
+      "liquor": "Gin",
+      "img": "Gin Bottle.jpg",
+      "instructions": "Drink It",
+      "chaser": "None",
+      "ingredients": {
+        "Gin": 1
       }
     }
   ]

@@ -1,6 +1,5 @@
 import json
 import time
-import datetime
 import pandas as pd
 
 import kivy
@@ -14,11 +13,10 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.textinput import TextInput
-
+from kivy.uix.spinner import Spinner
 
 # ----------------------------------------------------------------------------------------------------------------------
-#   Project: RICK
+#   Project: R.I.C.K.
 #   Description: Radically Intelligent Cocktail Kiosk
 #   Version: 0.2.0
 #   Created By: Ryan Hiatt
@@ -26,19 +24,16 @@ from kivy.uix.textinput import TextInput
 # ----------------------------------------------------------------------------------------------------------------------
 
 # TODO DrinkDB
-# TODO ShotsDB
-# TODO Keep name R.I.C.K. or change?
 # TODO Exception Handling! (Try, Except) Google kivy exception handling
 # TODO Clean up imports
 
 # Current Version of Kivy
-kivy.require('1.11.1')
+kivy.require('2.0.0')
 
 # Window Configuration
 Window.size = (800, 480)
 # Window.fullscreen = True
 
-# TODO Configuration file?
 PASS_KEY = '8093'
 
 
@@ -80,6 +75,7 @@ class LoginScreen(Screen):
     def clear_text(self):
         self.ids.passkey.text = ''
         LoginScreen.current_key = ''
+        self.nope_label.text = ''
 
     # Runs when submit button is pressed, checks for correct key
     def submit(self):
@@ -93,31 +89,7 @@ class LoginScreen(Screen):
             self.ids.passkey.text = ''
             LoginScreen.current_key = ''
 
-            # Creates Incorrect Passkey Popup
-            popup = Popup(title='Incorrect Passkey',
-                          title_align='center',
-                          size_hint=(0.5, 0.5),
-                          auto_dismiss=False)
-
-            # Popup Layout
-            pop_layout = GridLayout(rows=2)
-
-            # Popup Label
-            nope_label = Label(text='Incorrect Passkey\n Please Try Again',
-                               font_size=40)
-            pop_layout.add_widget(nope_label)
-
-            # Popup Close Button
-            close_btn = Button(text='Close',
-                               size_hint_y=0.4)
-            close_btn.bind(on_release=popup.dismiss)
-            pop_layout.add_widget(close_btn)
-
-            # Add Layout to Popup
-            popup.add_widget(pop_layout)
-
-            # Open Popup
-            popup.open()
+            self.nope_label.text = 'Invalid Pass Key!'
 
 
 class HomeScreen(Screen):
@@ -167,12 +139,12 @@ class HomeScreen(Screen):
 
         # Kivy schedule update_clock callback once every second
         Clock.schedule_interval(self.update_clock, 1)
-
-        # Kivy schedule update_date callback only once to set date
-        Clock.schedule_once(self.update_date, 1)
-
-        # Kivy schedule interval to check for new date every hour
-        Clock.schedule_interval(self.update_date, 3600)
+        #
+        # # Kivy schedule update_date callback only once to set date
+        # Clock.schedule_once(self.update_date, 1)
+        #
+        # # Kivy schedule interval to check for new date every hour
+        # Clock.schedule_interval(self.update_date, 3600)
 
     def update_clock(self, dt):
         # Get the current time
@@ -186,36 +158,36 @@ class HomeScreen(Screen):
         # Update the time on the home screen
         self.clock_label.text = time_stamp
 
-    def update_date(self, dt):
-        # Get the current time/date
-        today = datetime.date.today()
-
-        # Set the date Criteria
-        date_format = '%m-%d-%y'
-        date_stamp = today.strftime(date_format)
-
-        # Update the date on the home screen
-        self.date_label.text = date_stamp
+    # def update_date(self, dt):
+    #     # Get the current time/date
+    #     today = datetime.date.today()
+    #
+    #     # Set the date Criteria
+    #     date_format = '%m-%d-%y'
+    #     date_stamp = today.strftime(date_format)
+    #
+    #     # Update the date on the home screen
+    #     self.date_label.text = date_stamp
 
     def open_lockpop(self):
         # TODO Finalize design
         # TODO Finalize Layout
 
         # Initiate Popup
-        pop = Popup(size_hint=(0.5, 0.5),
+        pop = Popup(size_hint=(0.6, 0.6),
                     auto_dismiss=False,
-                    title='Sign Out',
+                    title='R.I.C.K.',
                     title_align='center',
-                    title_size=30)
+                    title_size=40)
 
         # Main Grid
         main_grid = GridLayout(rows=2)
         pop.add_widget(main_grid)
 
         # Row 1
-        label1 = Label(text='Sign Out?',
+        label1 = Label(text='Sign Out?\nWill Require Passkey Next Use',
                        text_size=self.size,
-                       font_size=50,
+                       font_size=30,
                        halign='center',
                        valign='middle')
         main_grid.add_widget(label1)
@@ -227,6 +199,7 @@ class HomeScreen(Screen):
         # No Button
         anchor1 = AnchorLayout(anchor_x='left',
                                anchor_y='bottom')
+
         btn1 = Button(width=100,
                       height=60,
                       text='NO',
@@ -239,6 +212,7 @@ class HomeScreen(Screen):
         # Yes Button
         anchor2 = AnchorLayout(anchor_x='right',
                                anchor_y='bottom')
+
         btn2 = Button(width=100,
                       height=60,
                       text='YES',
@@ -307,14 +281,12 @@ class AllDrinksScreen(Screen):
 
     # Creates a drink layout with button, label, and all respective properties for each drink in DrinkDB
     def create_drink_btns(self):
-
         # Opens DrinkDB file
         with open('../Dataframe/DrinkDB.json', 'r') as file:
             drink_db = json.load(file)
 
         # Iterates through each drink
         for i in range(len(drink_db['drinks'])):
-
             # Creates the path to each image
             img_path = '../Images/DrinkDB_Images/{}'.format(drink_db['drinks'][i]['img'])
 
@@ -326,7 +298,9 @@ class AllDrinksScreen(Screen):
                                   width=210)
 
             # Button/Image
-            btn_unit.add_widget(Button(background_normal=img_path,
+            btn_unit.add_widget(Button(text=drink_db['drinks'][i]['name'],
+                                       color=[0, 0, 0, 0],
+                                       background_normal=img_path,
                                        size_hint_y=None,
                                        size_hint_x=None,
                                        height=160,
@@ -348,10 +322,9 @@ class AllDrinksScreen(Screen):
 
     # On the press of any drink button do this
     def btn_press(self, instance):
-        # TODO might have to change how selected drink is passed through with dispense screen redesign
 
         global selected_drink
-        selected_drink = instance.id
+        selected_drink = instance.text
 
         self.manager.current = 'dispense'
 
@@ -375,6 +348,7 @@ class DispenseScreen(Screen):
 
     # This method tells the screen to update its parameters upon entering
     def on_enter(self, *args):
+
         Clock.schedule_once(self.setup_dispense_screen)
 
     def setup_dispense_screen(self, dt):
@@ -383,7 +357,7 @@ class DispenseScreen(Screen):
 
         for i in range(len(drink_db['drinks'])):
 
-            if drink_db['drinks'][i]['id'] == selected_drink:
+            if drink_db['drinks'][i]['name'] == selected_drink:
                 drink_profile = drink_db['drinks'][i]
 
                 self.name_label.text = drink_profile['name']
@@ -392,31 +366,29 @@ class DispenseScreen(Screen):
 
                 self.instructions_label.text = drink_profile['instructions']
 
-                img_path = '../DrinkDB_Images/{}'.format(drink_profile['img'])
+                img_path = '../Images/DrinkDB_Images/{}'.format(drink_profile['img'])
                 self.drink_img.source = img_path
 
-                for j in range(len(drink_profile['ingredients'])):
+                self.ingredient_layout.clear_widgets()
 
-                    if j == 0:
-                        self.ingredient_layout.clear_widgets()
+                for ingredient, amount in drink_profile['ingredients'].items():
 
-                    self.ingredient_layout.add_widget(Label(text=drink_profile['ingredients'][j],
+                    self.ingredient_layout.add_widget(Label(text=str(ingredient),
                                                             font_size=20,
                                                             size_hint_y=None,
                                                             height=30))
 
-                    self.ingredient_layout.add_widget(Label(text=str(drink_profile['measures'][j]) + ' OZ',
+                    self.ingredient_layout.add_widget(Label(text=str(amount) + ' OZ',
                                                             font_size=20,
                                                             size_hint_y=None,
                                                             height=30))
 
 
-class CategoriesScreen(Screen):
+class FilterScreen(Screen):
     # TODO Fill out description, usage, and structure
     # TODO Search by letter?
     # TODO Create new design layout (user friendly, and modern)
     # TODO Define button press
-    # TODO Add images to and from Base_Images
 
     """
     -- Description --
@@ -429,32 +401,29 @@ class CategoriesScreen(Screen):
 
     """
 
-    pass
 
-
-class FilteredDrinksScreen(Screen):
-    # TODO Is this needed? Try implementing filter options into all drinks screen
-    # TODO Fill out description, usage, and structure
-
-    """
-    -- Description --
-
-
-    -- Usage --
-
-
-    -- Structure --
-
-    """
-    pass
-
-
-class ShotsScreen(Screen):
+class SelectShotsScreen(Screen):
     # TODO Redesign lower portion
     # TODO New images, no background or black background?
     # TODO Does this lead into a popup or into a shots 'all drinks screen'?
     # TODO Fill out description, usage, and structure
 
+    """
+    -- Description --
+
+
+    -- Usage --
+
+
+    -- Structure --
+
+    """
+
+    def btn_press(self):
+        print('ok')
+
+
+class DisplayShotsScreen(Screen):
     """
     -- Description --
 
@@ -552,154 +521,53 @@ class CreateDrinkScreen(Screen):
 
     """
 
-    create_drink_layout = ObjectProperty(None)
-
     def __init__(self, **kwargs):
         super(CreateDrinkScreen, self).__init__(**kwargs)
 
-        Clock.schedule_once(self.setup_scrollview, 1)
+        Clock.schedule_once(self.setup_custom_drink_screen, 1)
 
-    def setup_scrollview(self, dt):
-        self.create_drink_layout.bind(minimum_height=self.create_drink_layout.setter('height'))
-        self.create_grids()
+    def setup_custom_drink_screen(self, dt):
 
-    def create_grids(self):
         on_hand = pd.read_csv('../Dataframe/OnHand.csv')
         on_hand = on_hand.sort_values(by='Name', ascending=True)
 
+        spinner_values = []
         for i in on_hand.index:
-            new_row = GridLayout(cols=7,
-                                 size_hint_y=None,
-                                 height=60)
+            spinner_values.append(on_hand.loc[i, 'Name'])
 
-            # Name Label
-            new_row.add_widget(Label(text=on_hand.loc[i, 'Name'],
-                                     font_size=30,
-                                     text_size=(400, self.height),
-                                     halign='left',
-                                     valign='middle',
-                                     multiline=False))
+        # Create 5 spinners for ingredient selection
+        for i in range(1, 6):
 
-            # Ingredient ID
-            new_row.add_widget(Label(text=on_hand.loc[i, 'ID'],
-                                     font_size=30,
-                                     text_size=(250, self.height),
-                                     halign='left',
-                                     valign='middle',
-                                     multiline=False))
+            # Create Spinner with all active on-hand ingredients
+            self.custom_drink_layout.add_widget(Spinner(text='None',
+                                                        values=tuple(spinner_values),
+                                                        size_hint=(None, None),
+                                                        width=500,
+                                                        height=50))
 
-            # -1 Button
-            new_row.add_widget(Button(text='-1',
-                                      font_size=20,
-                                      size_hint_x=0.15,
-                                      on_release=self.btn_press))
+            # Spacer Label
+            self.custom_drink_layout.add_widget(Label())
 
-            # -.25 Button
-            new_row.add_widget(Button(text='-.25',
-                                      font_size=20,
-                                      size_hint_x=0.15,
-                                      on_release=self.btn_press))
+            # Create Spinner with
+            self.custom_drink_layout.add_widget(Spinner(text='Amount',
+                                                        values=('0.25', '0.5', '0.75', '1',
+                                                                '1.25', '1.5', '1.75', '2',
+                                                                '2.25', '2.5', '2.75', '3',
+                                                                '3.25', '3.5', '3.75', '4',
+                                                                '4.25', '4.5', '4.75', '5'),
+                                                        size_hint=(None, None),
+                                                        width=100,
+                                                        height=50))
 
-            # Text Input
-            new_row.add_widget(TextInput(size_hint_x=0.25,
-                                         text='0',
-                                         font_size=40,
-                                         multiline=False))
+            self.custom_drink_layout.add_widget(Label(text='OZ',
+                                                      font_size=20,
+                                                      size_hint=(None, None),
+                                                      width=50,
+                                                      height=50))
 
-            # +.25 Button
-            new_row.add_widget(Button(text='+.25',
-                                      font_size=20,
-                                      size_hint_x=0.15,
-                                      on_release=self.btn_press))
-
-            # +1 Button
-            new_row.add_widget(Button(text='+1',
-                                      font_size=20,
-                                      size_hint_x=0.15,
-                                      on_release=self.btn_press))
-
-            # Add row to layout
-            self.create_drink_layout.add_widget(new_row)
-
-    def btn_press(self, instance):
-        id_pressed = instance.id
-        index = id_pressed.split('_')[1]
-
-        if '(-1)' in id_pressed:
-            for child in self.children:
-                print(child)
-
-        elif '(-.25)' in id_pressed:
-            pass
-
-        elif '(+.25)' in id_pressed:
-            pass
-
-        elif '(+1)' in id_pressed:
-            pass
-
-    def confirmation_popup(self):
-        # TODO A lot of redesign work
-
-        pop = Popup(size_hint=(0.5, 0.5),
-                    auto_dismiss=False,
-                    title='Dispense Drink',
-                    title_align='center',
-                    title_size=30)
-
-        # Main Grid
-        main_grid = GridLayout(rows=2)
-        pop.add_widget(main_grid)
-
-        # Row 1
-        label1 = Label(text='Dispense Drink?',
-                       text_size=self.size,
-                       font_size=50,
-                       halign='center',
-                       valign='middle')
-        main_grid.add_widget(label1)
-
-        # Row 2
-        btn_grid = GridLayout(size_hint_y=0.33,
-                              cols=2)
-
-        # No Button
-        anchor1 = AnchorLayout(anchor_x='left',
-                               anchor_y='bottom')
-        btn1 = Button(width=100,
-                      height=60,
-                      text='NO',
-                      font_size=20,
-                      on_release=pop.dismiss)
-        anchor1.add_widget(btn1)
-
-        btn_grid.add_widget(anchor1)
-
-        # Yes Button
-        anchor2 = AnchorLayout(anchor_x='right',
-                               anchor_y='bottom')
-        btn2 = Button(width=100,
-                      height=60,
-                      text='YES',
-                      font_size=20,
-                      on_press=pop.dismiss)
-        btn2.bind(on_release=self.dispense_drink)
-        btn2.bind(on_release=pop.dismiss)
-        anchor2.add_widget(btn2)
-        btn_grid.add_widget(anchor2)
-
-        # Add Grid 2 to Grid
-        main_grid.add_widget(btn_grid)
-
-        # Open the Popup
-        pop.open()
-
-    def dispense_drink(self, *args):
-        # TODO Dispense Custom Drink
-        # TODO Sends info to dispense screen where all ingredients and amounts are shown
-        # TODO Custom dispense screen can have image saying custom drink
-
-        pass
+            self.custom_drink_layout.add_widget(Label(size_hint=(None, None),
+                                                      width=25,
+                                                      height=50))
 
 
 class MyScreenManager(ScreenManager):
@@ -728,8 +596,9 @@ class MyScreenManager(ScreenManager):
                    HomeScreen(name='home'),
                    AllDrinksScreen(name='drinks'),
                    DispenseScreen(name='dispense'),
-                   CategoriesScreen(name='category'),
-                   ShotsScreen(name='shots'),
+                   FilterScreen(name='filter'),
+                   SelectShotsScreen(name='shots'),
+                   DisplayShotsScreen(name='select_shot'),
                    FavoritesScreen(name='favorites'),
                    CreateDrinkScreen(name='create')]
 

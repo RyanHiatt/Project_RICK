@@ -1,4 +1,4 @@
-#:kivy 1.11.1
+#:kivy 2.0.0
 
 
 
@@ -14,7 +14,7 @@
 ## ---------------------------------------------------------------------------------------------------------------------
 <LoginScreen>:
     passkey: passkey
-
+    nope_label: nope_label
 
     GridLayout:
         cols: 3
@@ -25,6 +25,10 @@
             rows: 4
 
             Label:
+                id: nope_label
+                bold: True
+                color: [1, 0, 0, 1]
+                font_size: 20
                 size_hint_y: 0.1
 
             TextInput:
@@ -109,38 +113,15 @@
 ## ---------------------------------------------------------------------------------------------------------------------
 <HomeScreen>:
     clock_label: clock_label
-    date_label: date_label
 
     GridLayout:
         rows: 3
 
 ## Top Row
-        GridLayout:
-            cols: 3
+        Label:
+            id: clock_label
             size_hint_y: 0.2
-            padding: [15,5,15,5]
-
-            Label:
-                size_hint_x: 0.75
-                text: 'User: Ryan Hiatt'
-                text_size: self.size
-                font_size: 20
-                halign: 'left'
-                valign: 'middle'
-
-            Label:
-                id: clock_label
-                font_size: 40
-                halign: 'center'
-                valign: 'middle'
-
-            Label:
-                id: date_label
-                size_hint_x: 0.75
-                text_size: self.size
-                font_size: 20
-                halign: 'right'
-                valign: 'middle'
+            font_size: 40
 
 ## Middle Row
         GridLayout:
@@ -199,7 +180,7 @@
                 padding: [8, 10, 5, 5]
 
                 Button:
-                    text: 'Sign Out'
+                    text: 'Lock Device'
                     font_size: 20
                     on_release:
                         root.open_lockpop()
@@ -282,10 +263,10 @@
 
                 Button:
                     width: root.width/4 - 30
-                    text: 'Categories'
+                    text: 'Filter'
                     font_size: 20
                     on_release:
-                        root.manager.current = 'category'
+                        root.manager.current = 'filter'
 
 ## ---------------------------------------------------------------------------------------------------------------------
 ##        _____    _                                                _____
@@ -401,120 +382,121 @@
 
         GridLayout:
             cols: 3
-            size_hint_y: None
-            height: 80
+            size_hint_y: 0.2
 
-            Button:
-                text: 'Back'
-                font_size: 25
-                on_release:
-                    root.manager.current = 'drinks'
+            AnchorLayout:
+                anchor_x: 'left'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [8, 10, 5, 5]
+
+                Button:
+                    text: 'Back'
+                    font_size: 20
+                    on_release:
+                        root.manager.current = 'drinks'
 
             Label:
-                size_hint_x: 0.05
+                text: 'R.I.C.K.'
+                font_size: 60
+                halign: 'center'
+                valign: 'middle'
 
-            Button:
-                text: 'Dispense'
-                font_size: 25
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [5, 10, 8, 5]
+
+                Button:
+                    width: root.width/4 - 30
+                    text: 'Dispense'
+                    font_size: 20
 
 ## ---------------------------------------------------------------------------------------------------------------------
-##         _____           _                                              _____
-##        / ____|         | |                                            / ____|
-##       | |        __ _  | |_    ___    __ _    ___    _ __   _   _    | (___     ___   _ __    ___    ___   _ __
-##       | |       / _` | | __|  / _ \  / _` |  / _ \  | '__| | | | |    \___ \   / __| | '__|  / _ \  / _ \ | '_ \
-##       | |____  | (_| | | |_  |  __/ | (_| | | (_) | | |    | |_| |    ____) | | (__  | |    |  __/ |  __/ | | | |
-##        \_____|  \__,_|  \__|  \___|  \__, |  \___/  |_|     \__, |   |_____/   \___| |_|     \___|  \___| |_| |_|
-##                                       __/ |                  __/ |
-##                                      |___/                  |___/
+##        ______   _   _   _                      _____
+##       |  ____| (_) | | | |                    / ____|
+##       | |__     _  | | | |_    ___   _ __    | (___     ___   _ __    ___    ___   _ __
+##       |  __|   | | | | | __|  / _ \ | '__|    \___ \   / __| | '__|  / _ \  / _ \ | '_ \
+##       | |      | | | | | |_  |  __/ | |       ____) | | (__  | |    |  __/ |  __/ | | | |
+##       |_|      |_| |_|  \__|  \___| |_|      |_____/   \___| |_|     \___|  \___| |_| |_|
 ## ---------------------------------------------------------------------------------------------------------------------
-<CategoriesScreen>:
+<FilterScreen>:
 
     GridLayout:
-		rows: 3
+        rows: 2
 
-		Label:
-			size_hint_y: 0.25
-			text: 'Categories'
-			text_size: self.size
-			font_size: 60
-			halign: 'center'
-			valign: 'middle'
+        GridLayout:
+            cols: 4
+            rows: 2
+            padding: [10, 10, 10, 10]
 
-		GridLayout:
-			rows: 2
-			cols: 3
+            Button:
+                text: 'A - C'
+                font_size: 25
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Sours'
-					font_size: 40
-					on_press: root.open_shotspop()
+            Button:
+                text: 'D - F'
+                font_size: 25
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Highballs'
-					font_size: 40
-					on_press: root.open_shotspop()
+            Button:
+                text: 'G - I'
+                font_size: 25
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Frozen'
-					font_size: 40
-					on_press: root.open_shotspop()
+            Button:
+                text: 'J - L'
+                font_size: 25
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Sweets'
-					font_size: 40
-					on_press: root.open_shotspop()
+            Button:
+                text: 'M - O'
+                font_size: 25
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Lowballs'
-					font_size: 40
-					on_press: root.open_shotspop()
+            Button:
+                text: 'P - R'
+                font_size: 25
 
-			AnchorLayout:
-				anchor_x: 'center'
-				Button:
-					width: root.width/3.5
-					size_hint_x: None
-					size_hint_y: 0.8
-					text: 'Random'
-					font_size: 40
-					on_press: root.open_shotspop()
+            Button:
+                text: 'S - U'
+                font_size: 25
 
-		AnchorLayout:
-			size_hint_y: 0.25
-			anchor_x: 'center'
-			anchor_y: 'bottom'
-			Button:
-				size_hint_x: 0.25
-				size_hint_y: 0.85
-				text: 'Back'
-				font_size: 40
-				on_press:
-					root.manager.current = 'home'
+            Button:
+                text: 'V - Z'
+                font_size: 25
+
+        GridLayout:
+            cols: 3
+            size_hint_y: 0.2
+
+            AnchorLayout:
+                anchor_x: 'left'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [8, 10, 5, 5]
+
+                Button:
+                    text: 'Back'
+                    font_size: 20
+                    on_release:
+                        root.manager.current = 'drinks'
+
+            Label:
+                text: 'R.I.C.K.'
+                font_size: 60
+                halign: 'center'
+                valign: 'middle'
+
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [5, 10, 8, 5]
+
+                Button:
+                    width: root.width/4 - 30
+                    text: 'Home'
+                    font_size: 20
+                    on_release:
+                        root.manager.current = 'home'
 
 ## ---------------------------------------------------------------------------------------------------------------------
 ##        ______   _   _   _                              _      _____
@@ -535,7 +517,7 @@
 ##        ____) | | | | | | (_) | | |_  \__ \    ____) | | (__  | |    |  __/ |  __/ | | | |
 ##       |_____/  |_| |_|  \___/   \__| |___/   |_____/   \___| |_|     \___|  \___| |_| |_|
 ## ---------------------------------------------------------------------------------------------------------------------
-<ShotsScreen>:
+<SelectShotsScreen>:
 
 	GridLayout:
 		rows: 2
@@ -550,6 +532,8 @@
 		        Button:
 		            id: whiskey_btn
 		            background_normal: '../Images/Base_Images/Whiskey Bottle.jpg'
+		            on_press:
+		                root.btn_press()
 
 		        Label:
 		            text: 'Whiskey'
@@ -564,6 +548,8 @@
 		        Button:
 		            id: vodka_btn
 		            background_normal: '../Images/Base_Images/Vodka Bottle.jpg'
+		            on_press:
+		                root.btn_press()
 
 		        Label:
 		            text: 'Vodka'
@@ -578,6 +564,8 @@
 		        Button:
 		            id: tequila_btn
 		            background_normal: '../Images/Base_Images/Tequila Bottle.jpg'
+		            on_press:
+		                root.btn_press()
 
 		        Label:
 		            text: 'Tequila'
@@ -592,6 +580,8 @@
 		        Button:
 		            id: rum_btn
 		            background_normal: '../Images/Base_Images/Rum Bottle.png'
+		            on_press:
+		                root.btn_press()
 
 		        Label:
 		            text: 'Rum'
@@ -606,6 +596,8 @@
 		        Button:
 		            id: gin_btn
 		            background_normal: '../Images/Base_Images/Gin Bottle.jpg'
+		            on_press:
+		                root.btn_press()
 
 		        Label:
 		            text: 'Gin'
@@ -613,17 +605,40 @@
 		            size_hint_y: None
 		            height: 40
 
-		AnchorLayout:
-			size_hint_y: 0.15
-			anchor_x: 'center'
-			anchor_y: 'bottom'
-			Button:
-				size_hint_x: 0.25
-				size_hint_y: 0.85
-				text: 'Back'
-				font_size: 40
-				on_press:
-					root.manager.current = 'home'
+		GridLayout:
+            cols: 3
+            size_hint_y: 0.2
+
+            AnchorLayout:
+                anchor_x: 'left'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [8, 10, 5, 5]
+
+                Button:
+                    text: 'Back'
+                    font_size: 20
+                    on_release:
+                        root.manager.current = 'home'
+
+            Label:
+                text: 'R.I.C.K.'
+                font_size: 60
+                halign: 'center'
+                valign: 'middle'
+
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'bottom'
+                size_hint_x: 0.75
+                padding: [5, 10, 8, 5]
+
+                Button:
+                    width: root.width/4 - 30
+                    text: 'All Shots'
+                    font_size: 20
+                    on_release:
+                        root.manager.current = 'home'
 
 ## ---------------------------------------------------------------------------------------------------------------------
 ##        ______                                  _   _                     _____
@@ -700,70 +715,48 @@
 ##        \_____| |_|     \___|  \__,_|  \__|  \___|   |_____/   \___| |_|     \___|  \___| |_| |_|
 ## ---------------------------------------------------------------------------------------------------------------------
 <CreateDrinkScreen>:
-    create_drink_layout: create_drink_layout
+    custom_drink_layout: custom_drink_layout
 
     GridLayout:
         rows: 2
 
-        ScrollView:
-			do_scroll_x: False
-			size_hint: (1, 1)
-			bar_width: 10
-			bar_color: 0, 0, 1, 0.5
-			bar_inactive_color: 0, 0, 1, 1
-			effect_cls: "DampedScrollEffect"
+        GridLayout:
+            id: custom_drink_layout
+            cols: 5
+            rows: 6
+            padding: [25, 5, 0, 10]
 
-			GridLayout:
-			    cols: 1
-				id: create_drink_layout
-				size_hint_y: None
-				padding: [5, 5, 10, 5]
-				spacing: [10, 20]
+            Label:
+                text: 'Choose Ingredients'
+                font_size: 30
+                underline: True
+                bold: True
+                size_hint: None, None
+                width: 500
+                height: 50
 
-				GridLayout:
-				    cols:7
-				    size_hint_y: None
-				    height: 60
+            Label:
+                size_hint_y: None
+                height: 50
 
-				    Label:
-				        text: 'Ingredient'
-				        font_size: 40
-				        text_size: (450, self.height)
-				        halign: 'left'
-				        valign: 'middle'
-				        bold: True
-				        underline: True
+            Label:
+                text: 'Amount'
+                font_size: 30
+                underline: True
+                bold: True
+                size_hint: None, None
+                width: 100
+                height: 50
 
-				    Label:
-				        text: 'Type'
-				        font_size: 40
-				        text_size: (300, self.height)
-				        halign: 'left'
-				        valign: 'middle'
-				        bold: True
-				        underline: True
+            Label:
+                size_hint: None, None
+                width: 50
+                height: 50
 
-				    Label:
-				        size_hint_x: 0.15
-
-				    Label:
-				        size_hint_x: 0.15
-
-				    Label:
-				        text: 'Amount'
-				        font_size: 40
-				        size_hint_x: 0.25
-				        text_size: (450, self.height)
-				        halign: 'center'
-				        valign: 'middle'
-				        bold: True
-				        underline: True
-
-				    Label:
-				        size_hint_x: 0.15
-
-				    Label:
-				        size_hint_x: 0.15
+            Label:
+                size_hint: None, None
+                width: 25
+                height: 50
 
         GridLayout:
             cols: 3
@@ -797,5 +790,3 @@
                     width: root.width/4 - 30
                     text: 'Dispense'
                     font_size: 20
-                    on_release:
-                        root.confirmation_popup()
