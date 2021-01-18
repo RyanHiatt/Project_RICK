@@ -1,8 +1,14 @@
-import json
+import pandas as pd
 
-with open('../Dataframe/DrinkDB.json', 'r') as file:
-    drink_db = json.load(file)
+on_hand = pd.read_csv('../Dataframe/OnHand.csv')
 
-drink_profile = drink_db['drinks'][1]
-for key, value in drink_profile['ingredients'].items():
-    print(key, value)
+ing = ''
+
+
+
+print(on_hand_list)
+
+if ing not in on_hand_list:
+    print('Not in list')
+else:
+    print('It is in list')

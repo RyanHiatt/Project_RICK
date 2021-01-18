@@ -23,9 +23,7 @@ from kivy.uix.spinner import Spinner
 #   Date Started: 11/17/2020
 # ----------------------------------------------------------------------------------------------------------------------
 
-# TODO DrinkDB
-# TODO Exception Handling! (Try, Except) Google kivy exception handling
-# TODO Clean up imports
+# TODO Add Code Comments
 
 # Current Version of Kivy
 kivy.require('2.0.0')
@@ -39,8 +37,6 @@ PASS_KEY = '8093'
 
 class LoginScreen(Screen):
     # TODO Add graphics to left and right of keypad
-    # TODO Determine pass through variables for top left of home screen
-    # TODO Finalize design
     # TODO Check description, usage, and structure
 
     """
@@ -93,9 +89,6 @@ class LoginScreen(Screen):
 
 
 class HomeScreen(Screen):
-    # TODO Beautify layout
-    # TODO Determine top left component
-    # TODO Finalize layout and design
     # TODO Check description, usage, and structure
 
     """
@@ -153,8 +146,6 @@ class HomeScreen(Screen):
         self.clock_label.text = time_stamp
 
     def open_lockpop(self):
-        # TODO Finalize design
-        # TODO Finalize Layout
 
         # Initiate Popup
         pop = Popup(size_hint=(0.6, 0.6),
@@ -221,9 +212,6 @@ class HomeScreen(Screen):
 
 class AllDrinksScreen(Screen):
     # TODO Update description, usage, and structure
-    # TODO Finalize Layout
-    # TODO Finalize Design
-    # TODO Possibly change categories button to filter button
 
     """
     -- Description --
@@ -315,8 +303,6 @@ class AllDrinksScreen(Screen):
 class DispenseScreen(Screen):
     # TODO Add option to add drink to favorites list
     # TODO Fill out description, usage, and structure
-    # TODO Convert to more dynamic screen able to work for all drinks, shots, and create drink
-    # TODO Finalize design
 
     """
     -- Description --
@@ -338,6 +324,12 @@ class DispenseScreen(Screen):
         with open('../Dataframe/DrinkDB.json', 'r') as file:
             drink_db = json.load(file)
 
+        # Creates a list of on hand ingredients to show if it is in stock
+        on_hand = pd.read_csv('../Dataframe/OnHand.csv')
+        on_hand_list = []
+        for ingredient in on_hand['ID']:
+            on_hand_list.append(ingredient)
+
         for i in range(len(drink_db['drinks'])):
 
             if drink_db['drinks'][i]['name'] == selected_drink:
@@ -356,22 +348,28 @@ class DispenseScreen(Screen):
 
                 for ingredient, amount in drink_profile['ingredients'].items():
 
+                    # Sets the color of the ingredient text based on if it is in stock(white) or not(red)
+                    if ingredient not in on_hand_list:
+                        text_color = [1, 0, 0, 1]
+                    else:
+                        text_color = [1, 1, 1, 1]
+
                     self.ingredient_layout.add_widget(Label(text=str(ingredient),
                                                             font_size=20,
+                                                            color=text_color,
                                                             size_hint_y=None,
                                                             height=30))
 
                     self.ingredient_layout.add_widget(Label(text=str(amount) + ' OZ',
                                                             font_size=20,
+                                                            color=text_color,
                                                             size_hint_y=None,
                                                             height=30))
 
 
 class FilterScreen(Screen):
     # TODO Fill out description, usage, and structure
-    # TODO Search by letter?
-    # TODO Create new design layout (user friendly, and modern)
-    # TODO Define button press
+    # TODO Search by letter
 
     """
     -- Description --
@@ -386,10 +384,10 @@ class FilterScreen(Screen):
 
 
 class SelectShotsScreen(Screen):
-    # TODO Redesign lower portion
     # TODO New images, no background or black background?
-    # TODO Does this lead into a popup or into a shots 'all drinks screen'?
+    # TODO Shots 'all drinks screen'
     # TODO Fill out description, usage, and structure
+    # TODO Change Gin shots to All Shots
 
     """
     -- Description --
@@ -403,7 +401,7 @@ class SelectShotsScreen(Screen):
     """
 
     def btn_press(self):
-        print('ok')
+        print('I need to make the DisplayShotsScreen')
 
 
 class DisplayShotsScreen(Screen):
@@ -426,7 +424,6 @@ class FavoritesScreen(Screen):
     # TODO Fill out description, usage, and structure
     # TODO Finalize layout
     # TODO Finalize Design
-    # TODO Screen Label
 
     """
     -- Description --
@@ -491,9 +488,7 @@ class FavoritesScreen(Screen):
 
 class CreateDrinkScreen(Screen):
     # TODO Fill out description, usage, and structure
-    # TODO Layout possibly with pictures, simplified and modern
-    # TODO Finalize Layout
-    # TODO Finalize Design
+    # TODO Create "drink order" json string
     """
     -- Description --
 
