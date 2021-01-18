@@ -139,12 +139,6 @@ class HomeScreen(Screen):
 
         # Kivy schedule update_clock callback once every second
         Clock.schedule_interval(self.update_clock, 1)
-        #
-        # # Kivy schedule update_date callback only once to set date
-        # Clock.schedule_once(self.update_date, 1)
-        #
-        # # Kivy schedule interval to check for new date every hour
-        # Clock.schedule_interval(self.update_date, 3600)
 
     def update_clock(self, dt):
         # Get the current time
@@ -157,17 +151,6 @@ class HomeScreen(Screen):
 
         # Update the time on the home screen
         self.clock_label.text = time_stamp
-
-    # def update_date(self, dt):
-    #     # Get the current time/date
-    #     today = datetime.date.today()
-    #
-    #     # Set the date Criteria
-    #     date_format = '%m-%d-%y'
-    #     date_stamp = today.strftime(date_format)
-    #
-    #     # Update the date on the home screen
-    #     self.date_label.text = date_stamp
 
     def open_lockpop(self):
         # TODO Finalize design
@@ -498,9 +481,10 @@ class FavoritesScreen(Screen):
 
             self.favorites_layout.add_widget(btn_unit)
 
+    # On the press of any drink button do this
     def btn_press(self, instance):
         global selected_drink
-        selected_drink = instance.id
+        selected_drink = instance.text
 
         self.manager.current = 'dispense'
 
